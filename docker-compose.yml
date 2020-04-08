@@ -64,7 +64,7 @@ services:
       NGINX_ERROR_LOG_LEVEL: debug
       NGINX_BACKEND_HOST: php
       NGINX_VHOST_PRESET: php
-      NGINX_SERVER_ROOT: /var/www/html/public
+      NGINX_SERVER_ROOT: /var/www/html/app/public
     volumes:
       - ./:/var/www/html
 # Options for macOS users (https://wodby.com/docs/stacks/php/local#docker-for-mac)
