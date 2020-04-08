@@ -8,8 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
-class LuckyController extends AbstractController {
-
+class LuckyController extends AbstractController
+{
     /**
      * @Route(
      *     "/lucky/number/{max}",
@@ -22,7 +22,8 @@ class LuckyController extends AbstractController {
      * @return Response
      * @throws \Exception
      */
-    public function number(int $max = 100) {
+    public function number(int $max = 100)
+    {
         $number = random_int(0, $max);
 
         return $this->render('lucky/number.html.twig', [
