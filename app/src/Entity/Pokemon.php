@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,16 @@ class Pokemon
      * @ORM\Column(type="float")
      */
     private $weight;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Type", inversedBy="pokemon")
+     */
+    private $type;
+
+    public function __construct()
+    {
+        $this->type = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,6 +114,32 @@ class Pokemon
     public function setWeight(float $weight): self
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Type[]
+     */
+    public function getType(): Collection
+    {
+        return $this->type;
+    }
+
+    public function addType(Type $type): self
+    {
+        if (!$this->type->contains($type)) {
+            $this->type[] = $type;
+        }
+
+        return $this;
+    }
+
+    public function removeType(Type $type): self
+    {
+        if ($this->type->contains($type)) {
+            $this->type->removeElement($type);
+        }
 
         return $this;
     }
