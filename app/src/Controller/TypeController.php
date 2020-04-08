@@ -38,11 +38,9 @@ class TypeController extends AbstractController
             );
         }
 
-        return new Response('Check out this type: '.$type->getName());
-
-        // or render a template
-        // in the template, print things with {{ type.name }}
-        // return $this->render('type/show.html.twig', ['type' => $type]);
+        return $this->render('type/show.html.twig', [
+            'type' => $type,
+        ]);
     }
 
     /**

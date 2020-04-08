@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PokemonController!{% endblock %}
+{% block title %}Pokemon list{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Pokémon list</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/app/src/Controller/PokemonController.php'|file_link(0) }}">src/Controller/PokemonController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/app/templates/pokemon/index.html.twig'|file_link(0) }}">templates/pokemon/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {% if pokemons is not empty %}
+    <table>
+        <tr>
+            <th class="number-name">Name</th>
+            <th class="type">Type</th>
+            <th class="category">Category</th>
+        </tr>
+        {% for pokemon in pokemons %}
+        <tr>
+            <td class="number-name"><a href="{{ path('pokemon_show', {id: pokemon.id}) }}">#{{ pokemon.number }} {{ pokemon.name }}</a></td>
+            <td class="type">
+                {% for type in pokemon.type %}
+                    <a href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>
+                {% endfor %}
+            </td>
+            <td class="category"><a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
 {% endblock %}

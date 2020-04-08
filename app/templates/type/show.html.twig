@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ type.name }} type{% endblock %}
+
+{% block body %}
+    <h1>{{ type.name }} type</h1>
+    {% if type.description is not empty %}
+        <p>{{ type.description }}</p>
+    {% endif %}
+
+    {% if type.pokemon is not empty %}
+        <table>
+            <tr>
+                <th class="number-name">Name</th>
+                <th class="type">Type</th>
+                <th class="category">Category</th>
+            </tr>
+            {% for pokemon in type.pokemon %}
+                <tr>
+                    <td class="number-name"><a href="{{ path('pokemon_show', {id: pokemon.id}) }}">#{{ pokemon.number }} {{ pokemon.name }}</a></td>
+                    <td class="type">
+                        {% for type in pokemon.type %}
+                            <a href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>
+                        {% endfor %}
+                    </td>
+                    <td class="category"><a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

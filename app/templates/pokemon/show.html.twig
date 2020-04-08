@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ pokemon.name }} #{{ pokemon.number }}{% endblock %}
+
+{% block body %}
+    <h1>{{ pokemon.name }} <span class="number">#{{ pokemon.number }}</span></h1>
+    {% if pokemon.description is not empty %}
+        <p>{{ pokemon.description }}</p>
+    {% endif %}
+
+    <div class="attributes">
+        <p><label>Type:</label>
+            {% for type in pokemon.type %}
+                <a href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>{% if not loop.last %}&nbsp;{% endif %}
+            {% endfor %}</p>
+        <p><label>Category:</label>
+            <a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a></p>
+        <p><label>Height:</label>
+            {{ pokemon.height }} millimeters</p>
+        <p><label>Weight:</label>
+            {{ pokemon.weight }} grams</p>
+    </div>
+{% endblock %}

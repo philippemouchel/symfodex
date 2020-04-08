@@ -17,8 +17,25 @@ class PokemonController extends AbstractController
      */
     public function index()
     {
+        // Instantiate entity repository to load all pokemons.
+        $pokemonRepository = $this->getDoctrine()->getRepository(Pokemon::class);
+        $pokemons = $pokemonRepository->findAll();
+
         return $this->render('pokemon/index.html.twig', [
             'controller_name' => 'PokemonController',
+            'pokemons' => $pokemons,
+        ]);
+    }
+
+    /**
+     * @Route("/pokemon/{id}", name="pokemon_show")
+     * @param Pokemon $pokemon
+     * @return Response
+     */
+    public function show(Pokemon $pokemon)
+    {
+        return $this->render('pokemon/show.html.twig', [
+            'pokemon' => $pokemon,
         ]);
     }
 

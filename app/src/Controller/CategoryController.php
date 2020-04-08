@@ -39,11 +39,9 @@ class CategoryController extends AbstractController
             );
         }
 
-        return new Response('Check out this category: '.$category->getName());
-
-        // or render a template
-        // in the template, print things with {{ category.name }}
-        // return $this->render('category/show.html.twig', ['category' => $category]);
+        return $this->render('category/show.html.twig', [
+            'category' => $category,
+        ]);
     }
 
     /**
