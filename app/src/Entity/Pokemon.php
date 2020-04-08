@@ -48,6 +48,12 @@ class Pokemon
      */
     private $type;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="pokemon")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
     public function __construct()
     {
         $this->type = new ArrayCollection();
@@ -140,6 +146,18 @@ class Pokemon
         if ($this->type->contains($type)) {
             $this->type->removeElement($type);
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
