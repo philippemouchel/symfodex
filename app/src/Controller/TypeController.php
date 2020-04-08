@@ -46,7 +46,25 @@ class TypeController extends AbstractController
     }
 
     /**
+     * This is another way to get object from a database,
+     * using ParamConverter to fetch object automatically from params.
+     *
+     * @route("/type/convert/{id}", name="type_show_convert"))
+     * @param Type $type
+     * @return Response
+     */
+    public function showParamConverter(Type $type)
+    {
+        return new Response('Check out this type: '.$type->getName());
+
+        // or render a template
+        // in the template, print things with {{ type.name }}
+        // return $this->render('type/show.html.twig', ['type' => $type]);
+    }
+
+    /**
      * Please don't use this route, it was just a test.
+     *
      * @Route("/create/type", name="create_type")
      * @return Response
      */

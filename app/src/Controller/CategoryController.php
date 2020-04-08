@@ -47,7 +47,8 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * This is just another way to get object from a database, using Symfony's autowiring and dependency injection.
+     * This is just another way to get object from a database,
+     * using Symfony's autowiring and dependency injection.
      *
      * @Route("/category/repo/{id}", name="category_show_repo")
      * @param $id
@@ -74,6 +75,7 @@ class CategoryController extends AbstractController
 
     /**
      * Please don't use this route, it was just a test.
+     *
      * @Route("/create/category", name="create_category")
      * @return Response
      */
