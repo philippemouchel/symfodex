@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "009ef9d1e91318ed98f3482ef4b47323",
+    "content-hash": "31b14ad47962ba1926713495c9e52465",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1257,6 +1257,51 @@
                 "sql"
             ],
             "time": "2014-01-12T16:20:24+00:00"
+        },
+        {
+            "name": "jordanbrauer/unit-converter",
+            "version": "v0.8.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jordanbrauer/unit-converter.git",
+                "reference": "168844a111e7524c98173c1eb78ac78510b47691"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jordanbrauer/unit-converter/zipball/168844a111e7524c98173c1eb78ac78510b47691",
+                "reference": "168844a111e7524c98173c1eb78ac78510b47691",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "codedungeon/phpunit-result-printer": "^0.19.12",
+                "consolidation/robo": "^1.2",
+                "phpmetrics/phpmetrics": "^2.4",
+                "phpunit/phpunit": "^6.3",
+                "symfony/var-dumper": "^3.3",
+                "vlucas/phpdotenv": "^2.4"
+            },
+            "type": "component",
+            "autoload": {
+                "psr-4": {
+                    "UnitConverter\\": "src/UnitConverter/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jordanbrauer",
+                    "email": "18744334+jordanbrauer@users.noreply.github.com"
+                }
+            ],
+            "description": "Convert standard units from one to another with this easy to use, lightweight package",
+            "time": "2019-08-16T22:15:09+00:00"
         },
         {
             "name": "monolog/monolog",

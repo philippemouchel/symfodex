@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use UnitConverter\UnitConverter;
 
 class PokemonController extends AbstractController
 {
@@ -34,8 +35,18 @@ class PokemonController extends AbstractController
      */
     public function show(Pokemon $pokemon)
     {
+        // Convert some properties.
+        $converter = UnitConverter::createBuilder()
+            ->addSimpleCalculator()
+            ->addDefaultRegistry()
+            ->build();
+        $height = $converter->convert($pokemon->getHeight())->from('mm')->to('m');
+        $weight = $converter->convert($pokemon->getWeight())->from('g')->to('kg');
+
         return $this->render('pokemon/show.html.twig', [
             'pokemon' => $pokemon,
+            'height' => $height,
+            'weight' => $weight,
         ]);
     }
 
