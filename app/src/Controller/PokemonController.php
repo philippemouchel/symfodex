@@ -51,24 +51,24 @@ class PokemonController extends AbstractController
 
         // Init new Pokemon object.
         $pokemon = new Pokemon();
-//        $pokemon->setNumber(15);
-//        $pokemon->setName('Beedrill');
-//        $pokemon->setDescription('Beedrill is extremely territorial. No one should ever approach its nest—this is for their own safety. If angered, they will attack in a furious swarm.');
-//        $pokemon->setHeight(1000); // millimeters.
-//        $pokemon->setWeight(29500); // grams.
-//
-//        // Relates this pokemon to the category.
-//        $category = $categoryRepository->findOneBy(['name' => 'Poison Bee']);
-//        $pokemon->setCategory($category);
-//
-//        // Relates this pokemon to the category.
-//        $types = [
-//            $typeRepository->findOneBy(['name' => 'Bug']),
-//            $typeRepository->findOneBy(['name' => 'Poison']),
-//        ];
-//        foreach ($types as $type) {
-//            $pokemon->addType($type);
-//        }
+        $pokemon->setNumber(18);
+        $pokemon->setName('Pidgeot');
+        $pokemon->setDescription('This Pokémon has a dazzling plumage of beautifully glossy feathers. Many Trainers are captivated by the striking beauty of the feathers on its head, compelling them to choose Pidgeot as their Pokémon.');
+        $pokemon->setHeight(1500); // millimeters.
+        $pokemon->setWeight(39500); // grams.
+
+        // Relates this pokemon to the category.
+        $category = $categoryRepository->findOneBy(['name' => 'Bird']);
+        $pokemon->setCategory($category);
+
+        // Relates this pokemon to the category.
+        $types = [
+            $typeRepository->findOneBy(['name' => 'Normal']),
+            $typeRepository->findOneBy(['name' => 'Flying']),
+        ];
+        foreach ($types as $type) {
+            $pokemon->addType($type);
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($pokemon);
