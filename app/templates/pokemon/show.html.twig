@@ -3,6 +3,8 @@
 {% block title %}{{ pokemon.name }} #{{ pokemon.number }}{% endblock %}
 
 {% block body %}
+    {% include 'navigation/main-menu.html.twig' with {'active_route': 'pokemon'} %}
+
     <h1>{{ pokemon.name }} <span class="number">#{{ pokemon.number }}</span></h1>
     {% if pokemon.description is not empty %}
         <p>{{ pokemon.description }}</p>

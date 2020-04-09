@@ -16,8 +16,13 @@ class TypeController extends AbstractController
      */
     public function index()
     {
+        // Instantiate entity repository to load all types.
+        $typeRepository = $this->getDoctrine()->getRepository(Type::class);
+        $types = $typeRepository->findAll();
+
         return $this->render('type/index.html.twig', [
             'controller_name' => 'TypeController',
+            'types' => $types,
         ]);
     }
 

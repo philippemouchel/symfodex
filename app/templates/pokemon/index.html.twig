@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pokemon list{% endblock %}
+{% block title %}Pokémon{% endblock %}
 
 {% block body %}
-    <h1>Pokédex</h1>
+    {% include 'navigation/main-menu.html.twig' with {'active_route': 'pokemon'} %}
+
+    <h1>Pokémon</h1>
 
     {% if pokemons is not empty %}
     <table class="table table-striped">
@@ -18,7 +20,7 @@
         <tbody>
         {% for pokemon in pokemons %}
             <tr>
-                <th scope="row" class="number">{{ pokemon.number }}</a></th>
+                <th scope="row" class="number">{{ pokemon.number }}</th>
                 <td class="name"><a href="{{ path('pokemon_show', {id: pokemon.id}) }}">{{ pokemon.name }}</a></td>
                 <td class="type">
                     {% for type in pokemon.type %}

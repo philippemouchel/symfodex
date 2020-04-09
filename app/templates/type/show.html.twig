@@ -3,6 +3,8 @@
 {% block title %}{{ type.name }} type{% endblock %}
 
 {% block body %}
+    {% include 'navigation/main-menu.html.twig' with {'active_route': 'type'} %}
+
     <h1>{{ type.name }} type</h1>
     {% if type.description is not empty %}
         <p>{{ type.description }}</p>

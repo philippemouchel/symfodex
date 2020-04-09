@@ -1,20 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Categories{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% include 'navigation/main-menu.html.twig' with {'active_route': 'category'} %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Categories</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/app/src/Controller/CategoryController.php'|file_link(0) }}">src/Controller/CategoryController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/app/templates/category/index.html.twig'|file_link(0) }}">templates/category/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {% if categories is not empty %}
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="name">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <th scope="row" class="name"><a href="{{ path('category_show', {id: category.id}) }}">{{ category.name }}</a></th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
 {% endblock %}

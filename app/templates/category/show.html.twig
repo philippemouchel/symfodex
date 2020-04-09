@@ -3,6 +3,8 @@
 {% block title %}{{ category.name }} category{% endblock %}
 
 {% block body %}
+    {% include 'navigation/main-menu.html.twig' with {'active_route': 'category'} %}
+
     <h1>{{ category.name }} category</h1>
 
     {% if category.pokemon is not empty %}
