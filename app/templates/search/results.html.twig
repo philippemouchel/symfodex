@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pokémon{% endblock %}
+
+{% block body %}
+    {% include 'navigation/main-menu.html.twig' with {'active_route': 'search'} %}
+
+    <h1>Search results for: {{ query }}</h1>
+
+    <p>Work in progress...</p>
+{% endblock %}
