@@ -82,7 +82,9 @@ class TypeController extends AbstractController
 //        $type->setName('Poison');
 //        $type->setName('Fire');
 //        $type->setName('Flying');
-        $type->setName('Water');
+//        $type->setName('Water');
+//        $type->setName('Bug');
+//        $type->setName('Normal');
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($type);

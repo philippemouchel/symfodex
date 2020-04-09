@@ -94,7 +94,13 @@ class CategoryController extends AbstractController
 //        $category->setName('Flame');
 //        $category->setName('Tiny Turtle');
 //        $category->setName('Turtle');
-        $category->setName('Shellfish');
+//        $category->setName('Worm');
+//        $category->setName('Cocoon');
+//        $category->setName('Butterfly');
+//        $category->setName('Hairy Bug');
+//        $category->setName('Poison Bee');
+//        $category->setName('Tiny Bird');
+//        $category->setName('Bird');
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($category);
