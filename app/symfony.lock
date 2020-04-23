@@ -84,6 +84,9 @@
     "jordanbrauer/unit-converter": {
         "version": "v0.8.3"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.3"
+    },
     "monolog/monolog": {
         "version": "2.0.2"
     },
@@ -112,9 +115,6 @@
         "version": "1.0.1"
     },
     "psr/container": {
-        "version": "1.0.0"
-    },
-    "psr/event-dispatcher": {
         "version": "1.0.0"
     },
     "psr/link": {
@@ -165,6 +165,9 @@
     },
     "symfony/css-selector": {
         "version": "v5.0.7"
+    },
+    "symfony/debug": {
+        "version": "v4.4.7"
     },
     "symfony/debug-bundle": {
         "version": "4.1",
@@ -305,18 +308,6 @@
             "config/packages/test/monolog.yaml"
         ]
     },
-    "symfony/notifier": {
-        "version": "5.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.0",
-            "ref": "c31585e252b32fe0e1f30b1f256af553f4a06eb9"
-        },
-        "files": [
-            "config/packages/notifier.yaml"
-        ]
-    },
     "symfony/options-resolver": {
         "version": "v5.0.7"
     },
@@ -338,16 +329,10 @@
             "tests/bootstrap.php"
         ]
     },
-    "symfony/polyfill-intl-grapheme": {
-        "version": "v1.15.0"
-    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.15.0"
     },
     "symfony/polyfill-intl-idn": {
-        "version": "v1.15.0"
-    },
-    "symfony/polyfill-intl-normalizer": {
         "version": "v1.15.0"
     },
     "symfony/polyfill-mbstring": {
@@ -416,9 +401,6 @@
         "version": "v2.0.1"
     },
     "symfony/stopwatch": {
-        "version": "v5.0.7"
-    },
-    "symfony/string": {
         "version": "v5.0.7"
     },
     "symfony/test-pack": {
@@ -504,6 +486,9 @@
     },
     "twig/twig": {
         "version": "v3.0.3"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.7.0"
