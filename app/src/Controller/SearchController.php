@@ -21,9 +21,12 @@ class SearchController extends AbstractController
      */
     public function index(Request $request, RepositoryManagerInterface $finder)
     {
+        $searchResults = [];
+
         // Get search query from GET parameters, and process a request to ES finder.
-        $searchQuery = $request->query->get('q');
-        $searchResults = $finder->getRepository(Pokemon::class)->find($searchQuery);
+        if ($searchQuery = $request->query->get('q')) {
+            $searchResults = $finder->getRepository(Pokemon::class)->find($searchQuery);
+        }
 
         return $this->render('search/results.html.twig', [
             'query' => $searchQuery,

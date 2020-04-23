@@ -5,7 +5,7 @@
 {% block body %}
     {% include 'navigation/main-menu.html.twig' with {'active_route': 'search'} %}
 
-    <h1>Search results for: {{ query }}</h1>
+    <h1>Search results for: <em>{{ query }}</em></h1>
 
     {% if results is not empty %}
         <table class="table table-striped">
