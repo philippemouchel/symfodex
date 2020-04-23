@@ -1,0 +1,20 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
+fos_elastica:
+    clients:
+        default: { url: '%env(ELASTICSEARCH_URL)%' }
+    indexes:
+        app_pokedex_%kernel.environment%:
+            index_name: app_pokedex
+            client: default
+            types:
+                pokemon:
+                    properties:
+                        id: ~
+                        number: ~
+                        name: { boost: 5 }
+                        description: { boost: 3 }
+                    persistence:
+                        driver: orm
+                        model: App\Entity\Pokemon
+                        provider: ~
+                        finder: ~
