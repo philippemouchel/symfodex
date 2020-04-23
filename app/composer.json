@@ -5,6 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "friendsofsymfony/elastica-bundle": "^5.1",
         "jordanbrauer/unit-converter": "^0.8.3",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/asset": "4.4.*",

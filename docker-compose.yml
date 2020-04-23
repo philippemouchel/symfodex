@@ -147,22 +147,22 @@ services:
 #    labels:
 #      - "traefik.http.routers.${PROJECT_NAME}_solr.rule=Host(`solr.${PROJECT_BASE_URL}`)"
 
-#  elasticsearch:
-#    image: wodby/elasticsearch:$ELASTICSEARCH_TAG
-#    environment:
-#      ES_JAVA_OPTS: "-Xms500m -Xmx500m"
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
+  elasticsearch:
+    image: wodby/elasticsearch:$ELASTICSEARCH_TAG
+    environment:
+      ES_JAVA_OPTS: "-Xms500m -Xmx500m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
 
-#  kibana:
-#    image: wodby/kibana:$KIBANA_TAG
-#    depends_on:
-#      - elasticsearch
-#    labels:
-#      - "traefik.http.services.${PROJECT_NAME}_kibana.loadbalancer.server.port=5601"
-#      - "traefik.http.routers.${PROJECT_NAME}_kibana.rule=Host(`kibana.${PROJECT_BASE_URL}`)"
+  kibana:
+    image: wodby/kibana:$KIBANA_TAG
+    depends_on:
+      - elasticsearch
+    labels:
+      - "traefik.http.services.${PROJECT_NAME}_kibana.loadbalancer.server.port=5601"
+      - "traefik.http.routers.${PROJECT_NAME}_kibana.rule=Host(`kibana.${PROJECT_BASE_URL}`)"
 
 #  memcached:
 #    container_name: "${PROJECT_NAME}_memcached"

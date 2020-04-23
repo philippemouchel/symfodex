@@ -16,8 +16,10 @@
             </li>
         </ul>
         <form class="form-inline" method="get" action="{{ path('search') }}">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            <div class="input-group">
+                <input type="search" class="form-control" name="q" placeholder="Search" aria-label="Search" value="{{ app.request.get('q') }}" />
+                <div class="input-group-append"><button type="submit" class="input-group-text">&#128269;</button></div>
+            </div>
         </form>
     </div>
 </nav>
