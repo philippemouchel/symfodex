@@ -16,7 +16,7 @@
             </li>
         </ul>
         <form class="form-inline" method="get" action="{{ path('search') }}">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ app.request.attributes.get('q') }}">
             <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>

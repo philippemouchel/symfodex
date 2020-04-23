@@ -7,5 +7,32 @@
 
     <h1>Search results for: {{ query }}</h1>
 
-    <p>Work in progress...</p>
+    {% if results is not empty %}
+        <table class="table table-striped">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col" class="number">#</th>
+                <th scope="col" class="name">Name</th>
+                <th scope="col" class="type">Type</th>
+                <th scope="col" class="category">Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pokemon in results %}
+                <tr>
+                    <th scope="row" class="number">{{ pokemon.number }}</th>
+                    <td class="name"><a href="{{ path('pokemon_show', {id: pokemon.id}) }}">{{ pokemon.name }}</a></td>
+                    <td class="type">
+                        {% for type in pokemon.type %}
+                            <a href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="category"><a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No results. Try something else.</p>
+    {% endif %}
 {% endblock %}

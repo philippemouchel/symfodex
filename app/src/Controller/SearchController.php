@@ -4,25 +4,30 @@
 namespace App\Controller;
 
 
+use App\Entity\Pokemon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 
 class SearchController extends AbstractController
 {
     /**
      * @Route("/search", name="search")
      * @param Request $request
+     * @param RepositoryManagerInterface $finder
      * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request, RepositoryManagerInterface $finder)
     {
-        // @todo: use https://packagist.org/packages/elasticsearch/elasticsearch package.
-        // some documentation available here: https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html
+        // Get search query from GET parameters, and process a request to ES finder.
+        $searchQuery = $request->query->get('q');
+        $searchResults = $finder->getRepository(Pokemon::class)->find($searchQuery);
 
         return $this->render('search/results.html.twig', [
-            'query' => $request->query->get('q'),
+            'query' => $searchQuery,
+            'results' => $searchResults,
         ]);
     }
 }
