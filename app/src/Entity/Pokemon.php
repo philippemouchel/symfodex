@@ -161,4 +161,9 @@ class Pokemon
 
         return $this;
     }
+
+    public function getFormattedNumber()
+    {
+        return sprintf("%'.03d\n", $this->number);
+    }
 }

@@ -3,6 +3,9 @@
 
 namespace App\Admin;
 
+use App\Entity\Category;
+use App\Entity\Type;
+use App\Entity\Pokemon;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -13,11 +16,16 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
-use App\Entity\Category;
-use App\Entity\Type;
 
 final class PokemonAdmin extends AbstractAdmin
 {
+    public function toString($object)
+    {
+        return $object instanceof Pokemon
+            ? '#' . $object->getFormattedNumber() . ' ' . $object->getName()
+            : 'Pokemon'; // shown in the breadcrumb on the create view
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -52,6 +60,7 @@ final class PokemonAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
+        $listMapper->addIdentifier('number');
         $listMapper->addIdentifier('name');
 //        $listMapper->addIdentifier('type');
 //        $listMapper->addIdentifier('category');
