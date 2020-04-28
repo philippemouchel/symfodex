@@ -29,6 +29,11 @@ services:
         arguments: [~, App\Entity\Category, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Category }
+    type.category:
+        class: App\Admin\TypeAdmin
+        arguments: [~, App\Entity\Type, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Type }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
