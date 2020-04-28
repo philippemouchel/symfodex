@@ -40,13 +40,11 @@ class PokemonController extends AbstractController
             ->addSimpleCalculator()
             ->addDefaultRegistry()
             ->build();
-        $height = $converter->convert($pokemon->getHeight())->from('mm')->to('m');
-        $weight = $converter->convert($pokemon->getWeight())->from('g')->to('kg');
 
         return $this->render('pokemon/show.html.twig', [
             'pokemon' => $pokemon,
-            'height' => $height,
-            'weight' => $weight,
+            'height' => $converter->convert($pokemon->getHeight())->from('mm')->to('m'),
+            'weight' => $converter->convert($pokemon->getWeight())->from('g')->to('kg'),
         ]);
     }
 
