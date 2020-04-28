@@ -19,13 +19,6 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 
 final class PokemonAdmin extends AbstractAdmin
 {
-    public function toString($object)
-    {
-        return $object instanceof Pokemon
-            ? '#' . $object->getFormattedNumber() . ' ' . $object->getName()
-            : 'Pokemon'; // shown in the breadcrumb on the create view
-    }
-
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
