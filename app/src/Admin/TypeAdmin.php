@@ -22,20 +22,23 @@ final class TypeAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name', TextType::class);
-        $formMapper->add('description', TextareaType::class, [
-            'required' => false,
-        ]);
+        $formMapper
+            ->add('name', TextType::class)
+            ->add('description', TextareaType::class, [
+                'required' => false,
+            ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name');
+        $datagridMapper
+            ->add('name');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name');
-        $listMapper->addIdentifier('description');
+        $listMapper
+            ->addIdentifier('name')
+            ->add('description');
     }
 }

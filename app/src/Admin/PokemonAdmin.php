@@ -55,14 +55,21 @@ final class PokemonAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name');
+        $datagridMapper
+            ->add('name')
+            ->add('category', null, [], EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+            ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('number');
-        $listMapper->addIdentifier('name');
-//        $listMapper->addIdentifier('type');
-//        $listMapper->addIdentifier('category');
+        $listMapper
+            ->addIdentifier('number')
+            ->addIdentifier('name')
+            ->add('description')
+            ->add('type.name')
+            ->add('category.name');
     }
 }
