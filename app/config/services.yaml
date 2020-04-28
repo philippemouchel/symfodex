@@ -23,7 +23,7 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # register Category Admin class so Sonata can access it
+    # register Entities Admin class so Sonata can access it
     admin.category:
         class: App\Admin\CategoryAdmin
         arguments: [~, App\Entity\Category, ~]
@@ -34,6 +34,11 @@ services:
         arguments: [~, App\Entity\Type, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Type }
+    type.pokemon:
+        class: App\Admin\PokemonAdmin
+        arguments: [~, App\Entity\Pokemon, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Pokemon }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
