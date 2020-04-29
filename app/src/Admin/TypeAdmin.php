@@ -19,19 +19,25 @@ final class TypeAdmin extends AbstractAdmin
             ->add('name', TextType::class)
             ->add('description', TextareaType::class, [
                 'required' => false,
+            ])
+            ->add('color', TextType::class, [
+                'help' => 'HTML color (name, HEXA or RGB). See <a href="https://www.w3schools.com/colors/" target="_blank">Colors Tutorial on W3C</a>.<br>Gradien available, please separate colors with <strong>,</strong>',
+                'help_html' => true,
             ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name');
+            ->add('name')
+            ->add('color');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('description');
+            ->add('description')
+            ->add('color');
     }
 }
