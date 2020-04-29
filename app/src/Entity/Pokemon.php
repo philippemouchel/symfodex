@@ -59,6 +59,10 @@ class Pokemon
         $this->type = new ArrayCollection();
     }
 
+    public function __toString() {
+        return '#' . $this->getFormattedNumber() . ' ' . $this->getName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -160,5 +164,10 @@ class Pokemon
         $this->category = $category;
 
         return $this;
+    }
+
+    public function getFormattedNumber()
+    {
+        return sprintf("%'.03d\n", $this->number);
     }
 }
