@@ -27,7 +27,7 @@ final class TypeAdmin extends AbstractAdmin
                 'help_html' => true,
             ])
             ->add('bootstrapColor', ChoiceType::class, [
-                'help' => 'Among Bootstrap4 colors. See <a href="https://getbootstrap.com/docs/4.0/utilities/colors/" target="_blank">Colors on Boostrap.com</a>.',
+                'help' => 'Among Bootstrap4 colors. See <a href="https://getbootstrap.com/docs/4.0/components/badge/#contextual-variations" target="_blank">Colors on Boostrap.com</a>.',
                 'help_html' => true,
                 'choices' => [
                     'Primary' => 'primary',
@@ -38,7 +38,7 @@ final class TypeAdmin extends AbstractAdmin
                     'Info' => 'info',
                     'Light' => 'light',
                     'Dark' => 'dark',
-                    'White' => 'white',
+                    'None' => '',
                 ],
             ]);
     }
