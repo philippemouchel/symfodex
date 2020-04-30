@@ -23,6 +23,10 @@ final class TypeAdmin extends AbstractAdmin
             ->add('color', TextType::class, [
                 'help' => 'HTML color (name, HEXA or RGB). See <a href="https://www.w3schools.com/colors/" target="_blank">Colors Tutorial on W3C</a>.<br>Gradien available, please separate colors with <strong>,</strong>',
                 'help_html' => true,
+            ])
+            ->add('bootstrapColor', TextType::class, [
+                'help' => 'Among Bootstrap4 color: <strong>primary, secondary, success, danger, warning, info, light, dark & white</strong>. See <a href="https://getbootstrap.com/docs/4.0/utilities/colors/" target="_blank">Colors on Boostrap.com</a>.',
+                'help_html' => true,
             ]);
     }
 
@@ -38,6 +42,7 @@ final class TypeAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('name')
             ->add('description')
-            ->add('color');
+            ->add('color')
+            ->add('bootstrapColor');
     }
 }
