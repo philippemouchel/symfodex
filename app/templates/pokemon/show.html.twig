@@ -17,7 +17,6 @@
             <li class="list-group-item">
                 <h4>{% for type in pokemon.type %}
                         <a class="badge badge-{{ type.bootstrapColor }}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>
-                        {% if not loop.last %}&nbsp;{% endif %}
                     {% endfor %}</h4>
             </li>
         </ul>

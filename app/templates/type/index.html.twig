@@ -18,7 +18,9 @@
         <tbody>
         {% for type in types %}
             <tr>
-                <th scope="row" class="name"><a href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a></th>
+                <th scope="row" class="name">
+                    <h3><a class="badge badge-{{ type.bootstrapColor }}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a></h3>
+                </th>
                 <td class="description">{{ type.description }}</td>
             </tr>
         {% endfor %}

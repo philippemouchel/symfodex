@@ -17,7 +17,9 @@
         <tbody>
         {% for category in categories %}
             <tr>
-                <th scope="row" class="name"><a href="{{ path('category_show', {id: category.id}) }}">{{ category.name }}</a></th>
+                <th scope="row" class="name">
+                    <h3><a href="{{ path('category_show', {id: category.id}) }}">{{ category.name }}</a></h3>
+                </th>
             </tr>
         {% endfor %}
         </tbody>
