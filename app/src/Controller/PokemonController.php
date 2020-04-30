@@ -35,7 +35,7 @@ class PokemonController extends AbstractController
      */
     public function show(Pokemon $pokemon)
     {
-        // Convert some properties.
+        // Initiate a unit converter.
         $converter = UnitConverter::createBuilder()
             ->addSimpleCalculator()
             ->addDefaultRegistry()
@@ -43,8 +43,8 @@ class PokemonController extends AbstractController
 
         return $this->render('pokemon/show.html.twig', [
             'pokemon' => $pokemon,
-            'height' => $converter->convert($pokemon->getHeight())->from('mm')->to('m'),
-            'weight' => $converter->convert($pokemon->getWeight())->from('g')->to('kg'),
+            'convertHeight' => $converter->convert($pokemon->getHeight())->from('mm')->to('m'),
+            'convertWeight' => $converter->convert($pokemon->getWeight())->from('g')->to('kg'),
         ]);
     }
 

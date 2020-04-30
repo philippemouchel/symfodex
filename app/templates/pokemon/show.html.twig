@@ -12,12 +12,12 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><span class="text-secondary">Category:</span> <a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a></li>
-            <li class="list-group-item"><span class="text-secondary">Height:</span> {{ height }} m</li>
-            <li class="list-group-item"><span class="text-secondary">Weight:</span> {{ weight }} kg</li>
+            <li class="list-group-item"><span class="text-secondary">Height:</span> {{ convertHeight }} m</li>
+            <li class="list-group-item"><span class="text-secondary">Weight:</span> {{ convertWeight }} kg</li>
             <li class="list-group-item">
                 <h4>{% for type in pokemon.type %}
-                <a class="badge badge-dark" href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>{% if not loop.last %}&nbsp;{% endif %}
-                {% endfor %}</h4>
+                        <a class="badge badge-{{ type.bootstrapColor }}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>
+                    {% endfor %}</h4>
             </li>
         </ul>
     </div>

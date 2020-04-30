@@ -33,6 +33,16 @@ class Type
      */
     private $pokemon;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $color;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $bootstrapColor;
+
     public function __construct()
     {
         $this->pokemon = new ArrayCollection();
@@ -95,6 +105,43 @@ class Type
             $this->pokemon->removeElement($pokemon);
             $pokemon->removeType($this);
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+
+    public function getBackgroundProperty() {
+        $colors = explode(',', $this->color);
+        switch (count($colors)) {
+            case 1:
+                return 'background-color: ' . $colors[0] . ';';
+            case 2:
+                return 'background: linear-gradient(180deg, ' . $colors[0] . ' 50%, ' . $colors[1] . ' 50%); background-color: ' . $colors[0] . ';';
+            default:
+                return '';
+        }
+    }
+
+    public function getBootstrapColor(): ?string
+    {
+        return $this->bootstrapColor;
+    }
+
+    public function setBootstrapColor(string $bootstrapColor): self
+    {
+        $this->bootstrapColor = $bootstrapColor;
 
         return $this;
     }
