@@ -11,8 +11,24 @@ fos_elastica:
                     properties:
                         id: ~
                         number: ~
-                        name: { boost: 5 }
-                        description: { boost: 3 }
+                        name:
+                            boost: 100
+                        description:
+                            boost: 60
+                        category:
+                            type: "object"
+                            properties:
+                                id: ~
+                                name:
+                                    boost: 80
+                        type:
+                            type: "object"
+                            properties:
+                                id: ~
+                                name:
+                                    boost: 80
+                                description:
+                                    boost: 40
                     persistence:
                         driver: orm
                         model: App\Entity\Pokemon
