@@ -1,8 +1,20 @@
 sonata_admin:
-    title: 'Sonata Admin'
+    title: 'Pokemon Admin'
+    title_logo: /admin/favicon.ico
     dashboard:
+        groups:
+            pokemon:
+                label: Pokemon
+                icon: <i class="fa fa-envira"></i>
+                items:
+                    - route: admin_app_category_list
+                      label: Categories
+                    - route: admin_app_type_list
+                      label: Types
+                    - route: admin_app_pokemon_list
+                      label: Pokemons
         blocks:
-            - { type: sonata.admin.block.admin_list, position: left }
+            - { type: sonata.admin.block.admin_list, position: top }
     options:
         legacy_twig_text_extension: false
 
