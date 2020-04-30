@@ -27,10 +27,15 @@ cd app/
 composer install
 ```
 
-Of course, database is empty, you'll have to run migration to get data structure, and then fill database using Admin UI.
+Of course, database is empty, you'll have to run migrations to get data structure, and then fill database using Admin UI.
 
-For now, there is no homepage.  
-You can access and navigate Pokemon list here: http://symfodex.localhost:8765/pokemon  
+Or, you can find databases dump in build/local/ folder. Feel free to import one, using a command like:
+```
+php bin/console doctrine:database:import ../build/local/40-pokemon.sql
+```
+
+For now, there is no homepage.
+You can access and navigate Pokemon list here: http://symfodex.localhost:8765/pokemon
 And Admin UI is here: http://symfodex.localhost:8765/admin/dashboard
 
 ## Elastic Search specificity
