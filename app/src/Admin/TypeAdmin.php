@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 final class TypeAdmin extends AbstractAdmin
 {
@@ -21,12 +22,24 @@ final class TypeAdmin extends AbstractAdmin
                 'required' => false,
             ])
             ->add('color', TextType::class, [
-                'help' => 'HTML color (name, HEXA or RGB). See <a href="https://www.w3schools.com/colors/" target="_blank">Colors Tutorial on W3C</a>.<br>Gradien available, please separate colors with <strong>,</strong>',
+                'help' => 'HTML color (name, HEXA or RGB). See <a href="https://www.w3schools.com/colors/" target="_blank">Colors Tutorial on W3C</a>.
+<br>Gradient available, please separate colors with <strong>","</strong>.',
                 'help_html' => true,
             ])
-            ->add('bootstrapColor', TextType::class, [
-                'help' => 'Among Bootstrap4 color: <strong>primary, secondary, success, danger, warning, info, light, dark & white</strong>. See <a href="https://getbootstrap.com/docs/4.0/utilities/colors/" target="_blank">Colors on Boostrap.com</a>.',
+            ->add('bootstrapColor', ChoiceType::class, [
+                'help' => 'Among Bootstrap4 colors. See <a href="https://getbootstrap.com/docs/4.0/utilities/colors/" target="_blank">Colors on Boostrap.com</a>.',
                 'help_html' => true,
+                'choices' => [
+                    'Primary' => 'primary',
+                    'Secondary' => 'secondary',
+                    'Success' => 'success',
+                    'Danger' => 'danger',
+                    'Warning' => 'warning',
+                    'Info' => 'info',
+                    'Light' => 'light',
+                    'Dark' => 'dark',
+                    'White' => 'white',
+                ],
             ]);
     }
 
