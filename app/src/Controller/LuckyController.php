@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,16 +12,19 @@ class LuckyController extends AbstractController
 {
     /**
      * @Route(
-     *     "/lucky/number/{max}",
+     *     "/{_locale}/lucky/number/{max}",
      *     name="tuto_lucky_number",
-     *     requirements={"max"="\d+"},
      *     methods={"GET"},
+     *     requirements={
+     *         "_locale"="en|fr",
+     *         "max"="\d+",
+     *     },
      * )
      *
      * @param Request $request
      * @param int $max
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function number(Request $request, int $max = 100)
     {
