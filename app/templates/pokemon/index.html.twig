@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pokémon{% endblock %}
+{% block title %}{% trans %}label.pokemon{% endtrans %}{% endblock %}
 
 {% block body %}
     {% include 'navigation/main-menu.html.twig' with {'active_route': 'pokemon'} %}
 
-    <h1>Pokémon</h1>
+    <h1>{% trans %}label.pokemon{% endtrans %}</h1>
 
     {% if pokemons is not empty %}
     <table class="table table-striped">
         <thead class="thead-light">
             <tr>
                 <th scope="col" class="number">#</th>
-                <th scope="col" class="name">Name</th>
-                <th scope="col" class="type">Type</th>
-                <th scope="col" class="category">Category</th>
+                <th scope="col" class="name">{% trans %}label.name{% endtrans %}</th>
+                <th scope="col" class="type">{% trans %}label.type{% endtrans %}</th>
+                <th scope="col" class="category">{% trans %}label.category{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>

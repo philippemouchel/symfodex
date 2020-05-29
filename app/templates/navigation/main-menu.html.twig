@@ -1,23 +1,23 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" href="/">Pokédex</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/">{% trans %}menu.pokedex{% endtrans %}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="{% trans %}menu.toggle-navigation{% endtrans %}">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link{% if active_route == 'pokemon' %} active{% endif %}" href="{{ path('pokemon') }}">Pokémon</a>
+                <a class="nav-link{% if active_route == 'pokemon' %} active{% endif %}" href="{{ path('pokemon') }}">{% trans %}menu.pokemons{% endtrans %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{% if active_route == 'type' %} active{% endif %}" href="{{ path('type') }}">Types</a>
+                <a class="nav-link{% if active_route == 'type' %} active{% endif %}" href="{{ path('type') }}">{% trans %}menu.types{% endtrans %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{% if active_route == 'category' %} active{% endif %}" href="{{ path('category') }}">Categories</a>
+                <a class="nav-link{% if active_route == 'category' %} active{% endif %}" href="{{ path('category') }}">{% trans %}menu.categories{% endtrans %}</a>
             </li>
         </ul>
         <form class="form-inline" method="get" action="{{ path('search') }}">
             <div class="input-group">
-                <input type="search" class="form-control" name="q" placeholder="Search" aria-label="Search" value="{{ app.request.get('q') }}" />
+                <input type="search" class="form-control" name="q" placeholder="{% trans %}menu.search{% endtrans %}" aria-label="{% trans %}menu.search{% endtrans %}" value="{{ app.request.get('q') }}" />
                 <div class="input-group-append"><button type="submit" class="input-group-text">&#128269;</button></div>
             </div>
         </form>

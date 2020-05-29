@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categories{% endblock %}
+{% block title %}{% trans %}label.categories{% endtrans %}{% endblock %}
 
 {% block body %}
     {% include 'navigation/main-menu.html.twig' with {'active_route': 'category'} %}
 
-    <h1>Categories</h1>
+    <h1>{% trans %}label.categories{% endtrans %}</h1>
 
     {% if categories is not empty %}
     <table class="table table-striped">
         <thead class="thead-light">
             <tr>
-                <th scope="col" class="name">Name</th>
+                <th scope="col" class="name">{% trans %}label.name{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
