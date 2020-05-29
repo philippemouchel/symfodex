@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'label.typename-type'|trans({'%typename%': type.name}) }}{% endblock %}
+{% block title %}{{ 'label.typename-type'|trans({'{typename}': type.name}) }}{% endblock %}
 
 {% block body %}
     {% include 'navigation/main-menu.html.twig' with {'active_route': 'type'} %}
 
-    <h1>{{ 'label.typename-type'|trans({'%typename%': type.name}) }}</h1>
+    <h1>{{ 'label.typename-type'|trans({'{typename}': type.name}) }}</h1>
     {% if type.description is not empty %}
         <p>{{ type.description }}</p>
     {% endif %}

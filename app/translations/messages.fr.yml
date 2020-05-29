@@ -1,0 +1,27 @@
+lucky:
+  number: 'Nombre porte-bonheur'
+  number-is: 'Votre nombre porte-bonheur est {number}.'
+
+menu:
+  toggle-navigation: 'Basculer la navigation'
+  pokedex: 'Pokédex'
+  pokemons: 'Pokémons'
+  types: 'Types'
+  categories: 'Catégories'
+  search: 'Rechercher'
+label:
+  pokedex: 'Pokédex'
+  pokemon: 'Pokémon'
+  name: 'Nom'
+  description: 'Description'
+  type: 'Type'
+  types: 'Types'
+  typename-type: 'Type {typename}'
+  category: 'Catégorie'
+  category-sc: 'Catégorie:'
+  categories: 'Catégories'
+  catname-category: 'Catégorie {catname}'
+  height-sc: 'Taille:'
+  weight-sc: 'Poids:'
+  search-results-for: 'Résultats de recherche pour :'
+  no-results: 'Pas de résultats. Essayez autre chose.'

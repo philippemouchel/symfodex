@@ -1,3 +1,7 @@
+lucky:
+  number: 'Lucky number'
+  number-is: 'Your lucky number is {number}.'
+
 menu:
   toggle-navigation: 'Toggle navigation'
   pokedex: 'Pokédex'
@@ -12,11 +16,11 @@ label:
   description: 'Description'
   type: 'Type'
   types: 'Types'
-  typename-type: '%typename% type'
+  typename-type: '{typename} type'
   category: 'Category'
   category-sc: 'Category:'
   categories: 'Categories'
-  catname-category: '%catname% category'
+  catname-category: '{catname} category'
   height-sc: 'Height:'
   weight-sc: 'Weight:'
   search-results-for: 'Search results for:'
