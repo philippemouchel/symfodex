@@ -1,0 +1,13 @@
+{% set route = app.request.attributes.get('_route') %}
+{% set route_params = app.request.attributes.get('_route_params') %}
+{% set params = route_params|merge(app.request.query.all) %}
+<div class="dropdown ml-2">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="localeSwitcherLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ app.request.locale|upper }}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="localeSwitcherLink">
+        {% for locale in locales %}
+        <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: locale })) }}">{{ locale|upper }}</a>
+        {% endfor %}
+    </div>
+</div>

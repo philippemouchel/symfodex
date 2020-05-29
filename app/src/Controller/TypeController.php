@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class TypeController extends AbstractController
 {
     /**
-     * @Route("/type", name="type")
+     * @Route("/{_locale}/type", name="type")
      * @return Response
      */
     public function index()
@@ -27,7 +27,7 @@ class TypeController extends AbstractController
     }
 
     /**
-     * @Route("/type/{id}", name="type_show")
+     * @Route("/{_locale}/type/{id}", name="type_show")
      * @param $id
      * @return Response
      */
@@ -52,7 +52,7 @@ class TypeController extends AbstractController
      * This is another way to get object from a database,
      * using ParamConverter to fetch object automatically from params.
      *
-     * @route("/type/convert/{id}", name="type_show_convert"))
+     * @route("/{_locale}/type/convert/{id}", name="type_show_convert"))
      * @param Type $type
      * @return Response
      */

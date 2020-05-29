@@ -14,7 +14,7 @@ use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 class SearchController extends AbstractController
 {
     /**
-     * @Route("/search", name="search")
+     * @Route("/{_locale}/search", name="search")
      * @param Request $request
      * @param RepositoryManagerInterface $finder
      * @return Response
