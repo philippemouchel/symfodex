@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lucky number ({{ max }}){% endblock %}
+{% block title %}{{ 'lucky.number'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Your lucky number is {{ number }}</h1>
+    <h1>{{ 'lucky.number-is'|trans({'{number}': number}) }}</h1>
+    <p>Locale: {{ locale }}</p>
 {% endblock %}

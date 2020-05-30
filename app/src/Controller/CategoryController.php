@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category", name="category")
+     * @Route("/{_locale}/category", name="category")
      * @return Response
      */
     public function index()
@@ -28,7 +28,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/category/{id}", name="category_show")
+     * @Route("/{_locale}/category/{id}", name="category_show")
      * @param $id
      * @return Response
      */
@@ -53,7 +53,7 @@ class CategoryController extends AbstractController
      * This is just another way to get object from a database,
      * using Symfony's autowiring and dependency injection.
      *
-     * @Route("/category/repo/{id}", name="category_show_repo")
+     * @Route("/{_locale}/category/repo/{id}", name="category_show_repo")
      * @param $id
      * @param CategoryRepository $categoryRepository
      * @return Response

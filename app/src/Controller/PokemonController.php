@@ -14,7 +14,7 @@ use UnitConverter\UnitConverter;
 class PokemonController extends AbstractController
 {
     /**
-     * @Route("/pokemon", name="pokemon")
+     * @Route("/{_locale}/pokemon", name="pokemon")
      */
     public function index()
     {
@@ -29,7 +29,7 @@ class PokemonController extends AbstractController
     }
 
     /**
-     * @Route("/pokemon/{id}", name="pokemon_show")
+     * @Route("/{_locale}/pokemon/{id}", name="pokemon_show")
      * @param Pokemon $pokemon
      * @return Response
      */

@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pokémon{% endblock %}
+{% block title %}{% trans %}label.search-results-for{% endtrans %} {{ query }}{% endblock %}
 
 {% block body %}
     {% include 'navigation/main-menu.html.twig' with {'active_route': 'search'} %}
 
-    <h1>Search results for: <em>{{ query }}</em></h1>
+    <h1>{% trans %}label.search-results-for{% endtrans %} <em>{{ query }}</em></h1>
 
     {% if results is not empty %}
         <table class="table table-striped">
             <thead class="thead-light">
             <tr>
                 <th scope="col" class="number">#</th>
-                <th scope="col" class="name">Name</th>
-                <th scope="col" class="type">Type</th>
-                <th scope="col" class="category">Category</th>
+                <th scope="col" class="name">{% trans %}label.name{% endtrans %}</th>
+                <th scope="col" class="type">{% trans %}label.type{% endtrans %}</th>
+                <th scope="col" class="category">{% trans %}label.category{% endtrans %}</th>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +33,6 @@
             </tbody>
         </table>
     {% else %}
-        <p>No results. Try something else.</p>
+        <p>{% trans %}label.no-results{% endtrans %}</p>
     {% endif %}
 {% endblock %}

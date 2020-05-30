@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ category.name }} category{% endblock %}
+{% block title %}{{ 'label.catname-category'|trans({'{catname}': category.name}) }}{% endblock %}
 
 {% block body %}
     {% include 'navigation/main-menu.html.twig' with {'active_route': 'category'} %}
 
-    <h1>{{ category.name }} category</h1>
+    <h1>{{ 'label.catname-category'|trans({'{catname}': category.name}) }}</h1>
 
     {% if category.pokemon is not empty %}
         <table class="table table-striped">
             <thead class="thead-dark">
             <tr>
                 <th scope="col" class="number">#</th>
-                <th scope="col" class="name">Name</th>
-                <th scope="col" class="type">Type</th>
-                <th scope="col" class="category">Category</th>
+                <th scope="col" class="name">{% trans %}label.name{% endtrans %}</th>
+                <th scope="col" class="type">{% trans %}label.type{% endtrans %}</th>
+                <th scope="col" class="category">{% trans %}label.category{% endtrans %}</th>
             </tr>
             </thead>
             <tbody>

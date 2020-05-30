@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Types{% endblock %}
+{% block title %}{% trans %}label.types{% endtrans %}{% endblock %}
 
 {% block body %}
     {% include 'navigation/main-menu.html.twig' with {'active_route': 'type'} %}
 
-    <h1>Types</h1>
+    <h1>{% trans %}label.types{% endtrans %}</h1>
 
     {% if types is not empty %}
     <table class="table table-striped">
         <thead class="thead-light">
             <tr>
-                <th scope="col" class="name">Name</th>
-                <th scope="col" class="type">Description</th>
+                <th scope="col" class="name">{% trans %}label.name{% endtrans %}</th>
+                <th scope="col" class="type">{% trans %}label.description{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>

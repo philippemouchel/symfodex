@@ -5,6 +5,8 @@ Purpose is to get a simple Pokedex, to explore entities, controllers, etc.
 
 It also includes a search engine, based on ElasticSearch (**FOS/Elastica** bundle), and an admin UI based on **Sonata/Admin**.
 
+Design is based on Bootstrap 4.4 library: https://getbootstrap.com/docs/4.4/getting-started/introduction/.
+
 ## Versions
 Yes, Symfony 5 is already up, but to be able to use **Sonata/Admin** and **FOS/Elastica**, I had to rollback to Symfony 4.
 These package are in active development, so I hope I'll be able to upgrade back to Symfony 5 quickly.
@@ -66,3 +68,7 @@ make shell
 cd app/
 php bin/console
 ```
+
+## Bibliography
+
+* To get a functional locale switcher: https://stackoverflow.com/questions/51597719/manually-switch-locale-in-symfony-4
