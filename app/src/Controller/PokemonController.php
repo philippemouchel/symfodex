@@ -5,14 +5,26 @@ namespace App\Controller;
 use App\Entity\Pokemon;
 use App\Entity\Category;
 use App\Entity\Type;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use App\Helper\PokemonHelper;
 use UnitConverter\UnitConverter;
 
 class PokemonController extends AbstractController
 {
+    /**
+     * @var PokemonHelper
+     */
+    private $pokemonHelper;
+
+    public function __construct(PokemonHelper $pokemonHelper)
+    {
+        $this->pokemonHelper = $pokemonHelper;
+    }
+
     /**
      * @Route("/{_locale}/pokemon", name="pokemon")
      */
@@ -30,21 +42,16 @@ class PokemonController extends AbstractController
 
     /**
      * @Route("/{_locale}/pokemon/{id}", name="pokemon_show")
+     * @param Request $request
      * @param Pokemon $pokemon
      * @return Response
      */
-    public function show(Pokemon $pokemon)
+    public function show(Request $request, Pokemon $pokemon)
     {
-        // Initiate a unit converter.
-        $converter = UnitConverter::createBuilder()
-            ->addSimpleCalculator()
-            ->addDefaultRegistry()
-            ->build();
-
         return $this->render('pokemon/show.html.twig', [
             'pokemon' => $pokemon,
-            'convertHeight' => $converter->convert($pokemon->getHeight())->from('mm')->to('m'),
-            'convertWeight' => $converter->convert($pokemon->getWeight())->from('g')->to('kg'),
+            'convertHeight' => $this->pokemonHelper->getHeightByLocale($request->getLocale(), $pokemon),
+            'convertWeight' => $this->pokemonHelper->getweightByLocale($request->getLocale(), $pokemon),
         ]);
     }
 
