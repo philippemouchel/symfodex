@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PokemonRepository")
  */
-class Pokemon
+class Pokemon implements Translatable
 {
     /**
      * @ORM\Id()
@@ -25,11 +27,13 @@ class Pokemon
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Translatable
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Gedmo\Translatable
      */
     private $description;
 
@@ -54,6 +58,13 @@ class Pokemon
      */
     private $category;
 
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
+
     public function __construct()
     {
         $this->type = new ArrayCollection();
@@ -71,6 +82,11 @@ class Pokemon
     public function getNumber(): ?int
     {
         return $this->number;
+    }
+
+    public function getFormattedNumber(): ?string
+    {
+        return sprintf("%'.03d\n", $this->number);
     }
 
     public function setNumber(int $number): self
@@ -166,8 +182,13 @@ class Pokemon
         return $this;
     }
 
-    public function getFormattedNumber()
+    public function getTranslatableLocale()
     {
-        return sprintf("%'.03d\n", $this->number);
+        return $this->locale;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }
