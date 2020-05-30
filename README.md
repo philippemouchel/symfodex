@@ -72,3 +72,4 @@ php bin/console
 ## Bibliography
 
 * To get a functional locale switcher: https://stackoverflow.com/questions/51597719/manually-switch-locale-in-symfony-4
+* Help to configure Gedmo's translation package: https://blog.joeymasip.com/gedmo-translations-in-symfony-4/
