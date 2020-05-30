@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
-class Category
+class Category implements Translatable
 {
     /**
      * @ORM\Id()
@@ -20,6 +22,7 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Translatable
      */
     private $name;
 
@@ -27,6 +30,13 @@ class Category
      * @ORM\OneToMany(targetEntity="App\Entity\Pokemon", mappedBy="category")
      */
     private $pokemon;
+
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
 
     public function __construct()
     {
@@ -83,5 +93,15 @@ class Category
         }
 
         return $this;
+    }
+
+    public function getTranslatableLocale()
+    {
+        return $this->locale;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }
