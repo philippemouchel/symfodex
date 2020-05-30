@@ -93,6 +93,52 @@ class TypeController extends AbstractController
         $entityManager->flush();
 
         return new Response('<html><body><p>Saved new type <strong>' . $type->getName() . ' (' . $type->getId() . ')</strong></p></body></html>');
+    }
 
+    /**
+     * Another test route, to translate all types.
+     *
+     * @Route("/{_locale}/translate/types", name="translate_types")
+     * @return Response
+     */
+    public function translateTypes()
+    {
+        // Load the type repository & manager.
+        $typeRepository = $this->getDoctrine()->getRepository(Type::class);
+        $entityManager = $this->getDoctrine()->getManager();
+        $types = $typeRepository->findAll();
+
+        $names = [
+            'fr' => [
+                1 => 'Plante',
+                2 => 'Poison',
+                3 => 'Feu',
+                4 => 'Vol',
+                5 => 'Eau',
+                6 => 'Insecte',
+                7 => 'Normal',
+                8 => 'Électrik',
+                9 => 'Sol',
+                10 => 'Fée',
+            ]
+        ];
+
+        foreach ($names as $language => $values) {
+            foreach ($types as $type) {
+                // Define new value for title
+                $type->setName($values[$type->getId()]);
+
+                // Define locale.
+                $type->setTranslatableLocale($language); // change locale
+
+                // Persist entity.
+                $entityManager->persist($type);
+            }
+        }
+
+        // Store everything in database.
+        $entityManager->flush();
+
+        return new Response('<html><body><p>Types translated!</p></body></html>');
     }
 }

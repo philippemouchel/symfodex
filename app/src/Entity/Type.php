@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TypeRepository")
  */
-class Type
+class Type implements Translatable
 {
     /**
      * @ORM\Id()
@@ -20,11 +22,13 @@ class Type
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Translatable
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Gedmo\Translatable
      */
     private $description;
 
@@ -43,12 +47,20 @@ class Type
      */
     private $bootstrapColor;
 
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
+
     public function __construct()
     {
         $this->pokemon = new ArrayCollection();
     }
 
-    public function __toString() {
+    public function __toString() :?string
+    {
         return $this->name;
     }
 
@@ -144,5 +156,15 @@ class Type
         $this->bootstrapColor = $bootstrapColor;
 
         return $this;
+    }
+
+    public function getTranslatableLocale()
+    {
+        return $this->locale;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }
