@@ -8,6 +8,11 @@ use UnitConverter\UnitConverter;
 class PokemonHelper
 {
     /**
+     * @var array
+     */
+    private $data;
+
+    /**
      * @var UnitConverter
      */
     private $converter;
@@ -18,6 +23,16 @@ class PokemonHelper
             ->addSimpleCalculator()
             ->addDefaultRegistry()
             ->build();
+    }
+
+    /**
+     * Return data property as an array,
+     * containing each pokemon in english and french.
+     * @return string[][][]
+     */
+    private function getDataFromArray()
+    {
+        return [];
     }
 
     /**
