@@ -165,7 +165,6 @@ class TypeController extends AbstractController
      */
     public function createTypes()
     {
-
         $types = $this->typeHelper->createTypes($this->getDoctrine());
         return new Response('<html><body><p>' . count($types) . ' types created!</p></body></html>');
     }

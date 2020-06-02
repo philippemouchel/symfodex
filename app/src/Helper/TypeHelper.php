@@ -217,7 +217,7 @@ class TypeHelper
 
         foreach ($this->data as $data) {
 
-            // Instantiate and set name for english type (assuming it's default locale).
+            // Instantiate and set properties for english type (assuming it's default locale).
             $type = new Type();
             $type->setName($data['en']['name']);
             $type->setColor($data['en']['color']);

@@ -222,7 +222,6 @@ class CategoryController extends AbstractController
      */
     public function createCategories()
     {
-
         $categories = $this->categoryHelper->createCategories($this->getDoctrine());
         return new Response('<html><body><p>' . count($categories) . ' categories created!</p></body></html>');
     }

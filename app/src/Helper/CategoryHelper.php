@@ -139,7 +139,7 @@ class CategoryHelper
 
         foreach ($this->data as $data) {
 
-            // Instantiate and set name for english category (assuming it's default locale).
+            // Instantiate and set properties for english category (assuming it's default locale).
             $category = new Category();
             $category->setName($data['en']['name']);
 

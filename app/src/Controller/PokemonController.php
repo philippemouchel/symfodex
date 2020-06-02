@@ -56,7 +56,7 @@ class PokemonController extends AbstractController
     }
 
     /**
-     * @Route("/create/pokemon", name="create_pokemon")
+     * @Route("/{_locale}/create/pokemon", name="create_pokemon")
      * @return Response
      */
     public function createPokemon()
@@ -297,5 +297,17 @@ class PokemonController extends AbstractController
         $entityManager->flush();
 
         return new Response('<html><body><p>Pokemons translated!</p></body></html>');
+    }
+
+    /**
+     * Another test route to create pokemons based on PokemonHelper data.
+     *
+     * @Route("/create/pokemons", name="create_pokemons")
+     * @return Response
+     */
+    public function createPokemons()
+    {
+        $pokemons = $this->pokemonHelper->createPokemons($this->getDoctrine());
+        return new Response('<html><body><p>' . count($pokemons) . ' pokemons created!</p></body></html>');
     }
 }
