@@ -6,9 +6,6 @@
     {% include 'navigation/main-menu.html.twig' with {'active_route': 'type'} %}
 
     <h1>{{ 'label.typename-type'|trans({'{typename}': type.name}) }}</h1>
-    {% if type.description is not empty %}
-        <p>{{ type.description }}</p>
-    {% endif %}
 
     {% if type.pokemon is not empty %}
         <table class="table table-striped">

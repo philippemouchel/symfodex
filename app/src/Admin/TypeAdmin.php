@@ -18,12 +18,9 @@ final class TypeAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('name', TextType::class)
-            ->add('description', TextareaType::class, [
-                'required' => false,
-            ])
             ->add('color', TextType::class, [
                 'help' => 'HTML color (name, HEXA or RGB). See <a href="https://www.w3schools.com/colors/" target="_blank">Colors Tutorial on W3C</a>.
-<br>Gradient available, please separate colors with <strong>","</strong>.',
+<br>Gradient 50/50 available, please separate the two colors with <strong>","</strong>.',
                 'help_html' => true,
             ])
             ->add('bootstrapColor', ChoiceType::class, [
@@ -54,7 +51,6 @@ final class TypeAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('description')
             ->add('color')
             ->add('bootstrapColor');
     }

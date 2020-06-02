@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Type;
+use App\Helper\TypeHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,6 +11,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TypeController extends AbstractController
 {
+    /**
+     * @var TypeHelper
+     */
+    private $typeHelper;
+
+    /**
+     * TypeController constructor.
+     * @param TypeHelper $typeHelper
+     */
+    public function __construct(TypeHelper $typeHelper)
+    {
+        $this->typeHelper = $typeHelper;
+    }
+
     /**
      * @Route("/{_locale}/type", name="type")
      * @return Response
@@ -140,5 +155,17 @@ class TypeController extends AbstractController
         $entityManager->flush();
 
         return new Response('<html><body><p>Types translated!</p></body></html>');
+    }
+
+    /**
+     * Another test route to create types based on TypeHelper data.
+     *
+     * @Route("/create/types", name="create_types")
+     * @return Response
+     */
+    public function createTypes()
+    {
+        $types = $this->typeHelper->createTypes($this->getDoctrine());
+        return new Response('<html><body><p>' . count($types) . ' types created!</p></body></html>');
     }
 }

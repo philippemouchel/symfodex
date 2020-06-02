@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Helper\CategoryHelper;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,6 +12,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends AbstractController
 {
+    /**
+     * @var CategoryHelper
+     */
+    private $categoryHelper;
+
+    /**
+     * CategoryController constructor.
+     * @param CategoryHelper $categoryHelper
+     */
+    public function __construct(CategoryHelper $categoryHelper)
+    {
+        $this->categoryHelper = $categoryHelper;
+    }
+
     /**
      * @Route("/{_locale}/category", name="category")
      * @return Response
@@ -197,5 +212,17 @@ class CategoryController extends AbstractController
         $entityManager->flush();
 
         return new Response('<html><body><p>Categories translated!</p></body></html>');
+    }
+
+    /**
+     * Another test route to create categories based on CategoryHelper data.
+     *
+     * @Route("/create/categories", name="create_categories")
+     * @return Response
+     */
+    public function createCategories()
+    {
+        $categories = $this->categoryHelper->createCategories($this->getDoctrine());
+        return new Response('<html><body><p>' . count($categories) . ' categories created!</p></body></html>');
     }
 }

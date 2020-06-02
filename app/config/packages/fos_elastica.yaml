@@ -27,8 +27,6 @@ fos_elastica:
                                 id: ~
                                 name:
                                     boost: 80
-                                description:
-                                    boost: 40
                     persistence:
                         driver: orm
                         model: App\Entity\Pokemon
