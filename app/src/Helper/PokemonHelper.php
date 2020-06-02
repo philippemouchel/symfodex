@@ -52,6 +52,36 @@ class PokemonHelper
                     'description' => 'Bulbizarre passe son temps à faire la sieste sous le soleil. Il y a une graine sur son dos. Il absorbe les rayons du soleil pour faire doucement pousser la graine.',
                 ],
             ],
+            [
+                'en' => [
+                    'number' => 2,
+                    'name' => 'Ivysaur',
+                    'description' => 'There is a bud on this Pokémon\'s back. To support its weight, Ivysaur\'s legs and trunk grow thick and strong. If it starts spending more time lying in the sunlight, it\'s a sign that the bud will bloom into a large flower soon.',
+                    'height' => 1000,
+                    'weight' => 13000,
+                    'type' => ['Grass', 'Poison'],
+                    'category' => 'Seed',
+                ],
+                'fr' => [
+                    'name' => 'Herbizarre',
+                    'description' => 'Un bourgeon a poussé sur le dos de ce Pokémon. Pour en supporter le poids, Herbizarre a dû se muscler les pattes. Lorsqu\'il commence à se prélasser au soleil, ça signifie que son bourgeon va éclore, donnant naissance à une fleur.',
+                ],
+            ],
+            [
+                'en' => [
+                    'number' => 3,
+                    'name' => 'Venusaur',
+                    'description' => 'There is a large flower on Venusaur\'s back. The flower is said to take on vivid colors if it gets plenty of nutrition and sunlight. The flower\'s aroma soothes the emotions of people.',
+                    'height' => 2000,
+                    'weight' => 100000,
+                    'type' => ['Grass', 'Poison'],
+                    'category' => 'Seed',
+                ],
+                'fr' => [
+                    'name' => 'Florizarre',
+                    'description' => 'Une belle fleur se trouve sur le dos de Florizarre. Elle prend une couleur vive lorsqu\'elle est bien nourrie et bien ensoleillée. Le parfum de cette fleur peut apaiser les gens.',
+                ],
+            ],
         ];
     }
 
