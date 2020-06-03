@@ -73,3 +73,5 @@ php bin/console
 
 * To get a functional locale switcher: https://stackoverflow.com/questions/51597719/manually-switch-locale-in-symfony-4
 * Help to configure Gedmo's translation package: https://blog.joeymasip.com/gedmo-translations-in-symfony-4/
+* Data from PokeAPI V2: https://pokeapi.co/docs/v2
+* Using a simple PHP wrapper by Dan Rovito: https://github.com/danrovito/pokephp
