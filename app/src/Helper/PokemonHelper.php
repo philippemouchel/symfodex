@@ -6,27 +6,36 @@ use App\Entity\Category;
 use App\Entity\Pokemon;
 use App\Entity\Type;
 use Doctrine\Persistence\ManagerRegistry;
+use PokePHP\PokeApi;
 use UnitConverter\UnitConverter;
 
 class PokemonHelper
 {
     /**
-     * @var array
+     * PokeAPI V2 connector.
+     * @var PokeApi
      */
-    private $data;
+    private $papi;
 
     /**
      * @var UnitConverter
      */
     private $converter;
 
+    /**
+     * @var array
+     */
+    private $data;
+
     public function __construct()
     {
-        $this->data = $this->getDataFromArray();
+        $this->papi = new PokeApi();
         $this->converter = UnitConverter::createBuilder()
             ->addSimpleCalculator()
             ->addDefaultRegistry()
             ->build();
+
+        $this->data = $this->getDataFromArray();
     }
 
     /**
@@ -218,6 +227,88 @@ class PokemonHelper
 
             $entityManager->persist($pokemon);
             $pokemons[] = $pokemon;
+        }
+
+        // Store everything in database.
+        $entityManager->flush();
+
+        // Return newly created pokemons.
+        return $pokemons;
+    }
+
+    /**
+     * Create pokemons from PokeAPI V2.
+     * @param ManagerRegistry $doctrine
+     * @param null|int $limit
+     * @param null|int $offset
+     * @return array
+     */
+    public function createPokemonsFromPAPI(ManagerRegistry $doctrine, $limit = null, $offset = null)
+    {
+        $pokemons = [];
+        $entityManager = $doctrine->getManager();
+        $typeRepository = $doctrine->getRepository(Type::class);
+        $translationRepository = $entityManager->getRepository('Gedmo\\Translatable\\Entity\\Translation');
+
+        $papiPokemons = json_decode($this->papi->resourceList('pokemon', $limit, $offset));
+        foreach ($papiPokemons->results as $result) {
+            $papiPokemon = json_decode($this->papi->pokemon($result->name));
+            $papiPokemonSpec = json_decode($this->papi->pokemonSpecies($result->name));
+
+            // Check for valid data.
+            if (isset($papiPokemon->height) &&
+                isset($papiPokemon->weight) &&
+                isset($papiPokemon->types) &&
+                isset($papiPokemonSpec->names) &&
+                isset($papiPokemonSpec->flavor_text_entries)) {
+                $tmpPokemon = [];
+
+                // Look for english and french name using a loop cause API does not return
+                // translated names array always the same.
+                foreach ($papiPokemonSpec->names as $item) {
+                    if ($item->language->name == 'en') {
+                        $tmpPokemon['en']['name'] = $item->name;
+                    }
+                    if ($item->language->name == 'fr') {
+                        $tmpPokemon['fr']['name'] = $item->name;
+                    }
+                }
+
+                // Look for english and french description using a loop cause API does not return
+                // translated descriptions array always the same.
+                foreach ($papiPokemonSpec->flavor_text_entries as $item) {
+                    if ($item->version->name == 'omega-ruby' && $item->language->name == 'en') {
+                        $tmpPokemon['en']['description'] = $item->flavor_text;
+                    }
+                    if ($item->version->name == 'omega-ruby' && $item->language->name == 'fr') {
+                        $tmpPokemon['fr']['description'] = $item->flavor_text;
+                    }
+                }
+
+                // Instantiate and set properties for english pokemon (assuming it's default locale).
+                $pokemon = new Pokemon();
+                $pokemon->setNumber($papiPokemonSpec->id);
+                $pokemon->setName($tmpPokemon['en']['name']);
+                $pokemon->setDescription($tmpPokemon['en']['description']);
+                $pokemon->setHeight($papiPokemon->height * 100); // to get millimeters
+                $pokemon->setWeight($papiPokemon->weight * 100); // to get grams
+
+                // Create relations to type and category entities.
+                foreach ($papiPokemon->types as $item) {
+                    if ($type = $typeRepository->findOneBy(['name' => $item->type->name])) {
+                        $pokemon->addType($type);
+                        $type->addPokemon($pokemon);
+                        $entityManager->persist($type);
+                    }
+                }
+
+                // Provide french translation.
+                $translationRepository->translate($pokemon, 'name', 'fr', $tmpPokemon['fr']['name']);
+                $translationRepository->translate($pokemon, 'description', 'fr', $tmpPokemon['fr']['description']);
+
+                $entityManager->persist($pokemon);
+                $pokemons[] = $pokemon;
+            }
         }
 
         // Store everything in database.

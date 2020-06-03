@@ -292,10 +292,10 @@ class TypeHelper
         foreach ($papiTypes->results as $result) {
             $papiType = json_decode($this->papi->pokemonType($result->name));
 
-            // Look for names translation.
+            // Check for valid data.
             if (isset($papiType->names)) {
 
-                // Look for english and french name with a look cause API does not return
+                // Look for english and french name using a loop cause API does not return
                 // translated names array always the same.
                 $tmpType = [];
                 foreach ($papiType->names as $item) {

@@ -310,4 +310,15 @@ class PokemonController extends AbstractController
         $pokemons = $this->pokemonHelper->createPokemons($this->getDoctrine());
         return new Response('<html><body><p>' . count($pokemons) . ' pokemons created!</p></body></html>');
     }
+
+    /**
+     * Another test route to create pokemons from PokeAPI.
+     *
+     * @Route("/papi/create/pokemons", name="papi_pokemons")
+     * @return Response
+     */
+    public function createPokemonsFromAPI() {
+        $types = $this->pokemonHelper->createPokemonsFromPAPI($this->getDoctrine(), 3);
+        return new Response('<html><body><p>' . count($types) . ' pokemons created, from PokeAPI V2!</p></body></html>');
+    }
 }
