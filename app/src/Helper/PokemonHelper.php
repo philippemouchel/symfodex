@@ -281,7 +281,7 @@ class PokemonHelper
                         $tmpPokemon['en']['description'] = $item->flavor_text;
                     }
                     if ($item->version->name == 'omega-ruby' && $item->language->name == 'fr') {
-                        $tmpPokemon['fr']['description'] = $item->flavor_text;
+                        $tmpPokemon['fr']['description'] = $item->flavor_text   ;
                     }
                 }
 

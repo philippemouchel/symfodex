@@ -27,7 +27,7 @@
                         <a class="badge {% if type.bootstrapColor is not empty %}badge-{{ type.bootstrapColor }}{% endif %}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>
                     {% endfor %}
                 </td>
-                <td class="category"><a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a></td>
+                <td class="category">{% if pokemon.category is not null %}<a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a>{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>

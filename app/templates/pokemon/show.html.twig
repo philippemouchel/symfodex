@@ -11,7 +11,9 @@
             <p class="card-text">{{ pokemon.description }}</p>
         </div>
         <ul class="list-group list-group-flush">
+            {% if pokemon.category is not null %}
             <li class="list-group-item"><span class="text-secondary">{% trans %}label.category-sc{% endtrans %}</span> <a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a></li>
+            {% endif %}
             <li class="list-group-item"><span class="text-secondary">{% trans %}label.height-sc{% endtrans %}</span> {{ convertHeight }}</li>
             <li class="list-group-item"><span class="text-secondary">{% trans %}label.weight-sc{% endtrans %}</span> {{ convertWeight }}</li>
             <li class="list-group-item">
