@@ -4,11 +4,16 @@ namespace App\Helper;
 
 
 use App\Entity\Type;
-use Doctrine\Persistence\ManagerRegistry;
 use PokePHP\PokeApi;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class TypeHelper
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
     /**
      * PokeAPI V2 connector.
      * @var PokeApi
@@ -22,9 +27,11 @@ class TypeHelper
 
     /**
      * CategoryHelper constructor.
+     * @param ContainerInterface $container
      */
-    public function __construct()
+    public function __construct(ContainerInterface $container)
     {
+        $this->container = $container;
         $this->papi = new PokeApi();
         $this->data = $this->getDataFromArray();
     }
@@ -242,12 +249,12 @@ class TypeHelper
 
     /**
      * Create types.
-     * @param ManagerRegistry $doctrine
      * @return array
      */
-    public function createTypes(ManagerRegistry $doctrine)
+    public function createTypes()
     {
         $types = [];
+        $doctrine = $this->container->get('doctrine');
         $entityManager = $doctrine->getManager();
 
         // Load a specific repository to persist multilingual entities.
@@ -277,14 +284,14 @@ class TypeHelper
 
     /**
      * Create types from PokeAPI V2.
-     * @param ManagerRegistry $doctrine
      * @param null|int $limit
      * @param null|int $offset
      * @return array
      */
-    public function createTypesFromPAPI(ManagerRegistry $doctrine, $limit = null, $offset = null)
+    public function createTypesFromPAPI($limit = null, $offset = null)
     {
         $types = [];
+        $doctrine = $this->container->get('doctrine');
         $entityManager = $doctrine->getManager();
         $translationRepository = $entityManager->getRepository('Gedmo\\Translatable\\Entity\\Translation');
 
