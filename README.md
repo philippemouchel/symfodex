@@ -5,7 +5,7 @@ Purpose is to get a simple Pokedex, to explore entities, controllers, etc.
 
 It also includes a search engine, based on ElasticSearch (**FOS/Elastica** bundle), and an admin UI based on **Sonata/Admin**.
 
-Design is based on Bootstrap 4.4 library: https://getbootstrap.com/docs/4.4/getting-started/introduction/.
+Design is using Bootstrap 4.4 library: https://getbootstrap.com/docs/4.4/getting-started/introduction/.
 
 ## Versions
 Yes, Symfony 5 is already up, but to be able to use **Sonata/Admin** and **FOS/Elastica**, I had to rollback to Symfony 4.
@@ -14,7 +14,7 @@ These package are in active development, so I hope I'll be able to upgrade back 
 ## Requirements & installation
 To run locally, you have to start a **Wodby4PHP** stack, here are the requirements: https://wodby.com/docs/stacks/php/local/
 
-Local environment is already configured, and you should only have to run one command to run the entire stack:
+Local environment is all set, and you should only have to run one command to run the entire stack:
 ```
 # from project root
 make up
@@ -30,10 +30,17 @@ composer install
 ```
 
 Of course, database is empty, you'll have to run migrations to get data structure, and then fill database using Admin UI.
+```
+# run all migrations to create SQL tables
+php bin/console doctrine:migrations:migrate --no-interaction
+```
 
 Or, you can find databases dump in build/local/ folder. Feel free to import one, using a command like:
 ```
+# import a database (deprecated, as you can now import contents from PokeAPI V2
 php bin/console doctrine:database:import ../build/local/40-pokemon.sql
+# run all migrations to create SQL tables (just in case imported DB is too old)
+php bin/console doctrine:migrations:migrate --no-interaction
 ```
 
 For now, there is no homepage.
@@ -57,6 +64,13 @@ curl -XPUT -H "Content-Type: application/json" http://symfodex_elasticsearch_1:9
 ```
 
 Source available here: https://selleo.com/til/posts/esrgfyxjee-how-to-fix-elasticsearch-forbidden12index-read-only
+
+## Fill database using PokeAPI V2
+
+Two routes are available to make a call to PokeAPI V2 and import contents:
+* Types: http://symfodex.localhost:8765/papi/create/types
+* Pokemons: http://symfodex.localhost:8765/papi/create/pokemons
+  * For this route, pokemons are imported by batches of 20, but at the end, click the provided link to import next batch
 
 ## Symfony command lines
 
