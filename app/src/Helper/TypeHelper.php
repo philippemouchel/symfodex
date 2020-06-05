@@ -33,6 +33,7 @@ class TypeHelper
     {
         $this->container = $container;
         $this->papi = new PokeApi();
+
         $this->data = $this->getDataFromArray();
     }
 

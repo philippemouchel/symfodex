@@ -7,10 +7,16 @@ use App\Entity\Pokemon;
 use App\Entity\Type;
 use Doctrine\Persistence\ManagerRegistry;
 use PokePHP\PokeApi;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use UnitConverter\UnitConverter;
 
 class PokemonHelper
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
     /**
      * PokeAPI V2 connector.
      * @var PokeApi
@@ -27,9 +33,15 @@ class PokemonHelper
      */
     private $data;
 
-    public function __construct()
+    /**
+     * PokemonHelper constructor.
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
     {
+        $this->container = $container;
         $this->papi = new PokeApi();
+
         $this->converter = UnitConverter::createBuilder()
             ->addSimpleCalculator()
             ->addDefaultRegistry()
@@ -186,12 +198,12 @@ class PokemonHelper
 
     /**
      * Create pokemons.
-     * @param ManagerRegistry $doctrine
      * @return array
      */
-    public function createPokemons(ManagerRegistry $doctrine)
+    public function createPokemons()
     {
         $pokemons = [];
+        $doctrine = $this->container->get('doctrine');
         $entityManager = $doctrine->getManager();
         $typeRepository = $doctrine->getRepository(Type::class);
         $categoryRepository = $doctrine->getRepository(Category::class);
@@ -238,14 +250,14 @@ class PokemonHelper
 
     /**
      * Create pokemons from PokeAPI V2.
-     * @param ManagerRegistry $doctrine
      * @param null|int $limit
      * @param null|int $offset
      * @return array
      */
-    public function createPokemonsFromPAPI(ManagerRegistry $doctrine, $limit = null, $offset = null)
+    public function createPokemonsFromPAPI($limit = null, $offset = null)
     {
         $pokemons = [];
+        $doctrine = $this->container->get('doctrine');
         $entityManager = $doctrine->getManager();
         $typeRepository = $doctrine->getRepository(Type::class);
         $translationRepository = $entityManager->getRepository('Gedmo\\Translatable\\Entity\\Translation');
