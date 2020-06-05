@@ -46,6 +46,7 @@ class PapiPokemonsCommand extends Command
         $io->title('Importing pokemons from PokeAPI V2');
 
         // Calculate batches.
+        // @todo, use offset to be able to import 2nd gen pokemons only.
         $offset = $input->getArgument('offset');
         $limit = $input->getArgument('limit');
         $batchNumber = floor($limit / self::PER_BATCH);
