@@ -54,7 +54,7 @@ class Pokemon implements Translatable
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="pokemon")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $category;
 

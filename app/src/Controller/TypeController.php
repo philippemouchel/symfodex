@@ -165,7 +165,18 @@ class TypeController extends AbstractController
      */
     public function createTypes()
     {
-        $types = $this->typeHelper->createTypes($this->getDoctrine());
+        $types = $this->typeHelper->createTypes();
         return new Response('<html><body><p>' . count($types) . ' types created!</p></body></html>');
+    }
+
+    /**
+     * Another test route to create types from PokeAPI.
+     *
+     * @Route("/papi/create/types", name="papi_types")
+     * @return Response
+     */
+    public function createTypesFromAPI() {
+        $types = $this->typeHelper->createTypesFromPAPI();
+        return new Response('<html><body><p>' . count($types) . ' types created, from PokeAPI V2!</p></body></html>');
     }
 }

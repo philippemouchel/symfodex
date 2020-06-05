@@ -30,6 +30,9 @@ class LuckyController extends AbstractController
     {
         $number = random_int(0, $max);
         $locale = $request->getLocale();
+        // dd($request); // dump&die, simple.
+        dump($max, $number, $locale); // dump in the dump server
+        // @see https://symfony.com/doc/current/components/var_dumper.html#the-dump-server
 
         return $this->render('lucky/number.html.twig', [
             'max' => $max,

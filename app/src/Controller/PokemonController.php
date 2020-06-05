@@ -310,4 +310,27 @@ class PokemonController extends AbstractController
         $pokemons = $this->pokemonHelper->createPokemons($this->getDoctrine());
         return new Response('<html><body><p>' . count($pokemons) . ' pokemons created!</p></body></html>');
     }
+
+    /**
+     * Another test route to create pokemons from PokeAPI.
+     *
+     * @Route("/papi/create/pokemons/{limit}/{offset}", name="papi_pokemons")
+     * @param int $limit
+     * @param int $offset
+     * @return Response
+     */
+    public function createPokemonsFromAPI($limit = 20, $offset = 0)
+    {
+        // Set a limit (to improve) to create only 1st gen Pokemons.
+        $max = 151;
+        if ($limit + $offset > $max) {
+            $limit = $max % $offset;
+        }
+
+        $types = $this->pokemonHelper->createPokemonsFromPAPI($this->getDoctrine(), $limit, $offset);
+        return new Response('<html><body>
+            <p>' . count($types) . ' pokemons created, from PokeAPI V2!</p>
+            <p><a href="' . $this->generateUrl('papi_pokemons', ['limit' => $limit, 'offset' => $offset+20]) . '">Next batch</a></p>
+        </body></html>');
+    }
 }
