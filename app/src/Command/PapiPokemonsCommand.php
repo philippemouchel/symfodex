@@ -18,7 +18,7 @@ class PapiPokemonsCommand extends Command
     /**
      * Number of pokemons to be imported in one batch.
      */
-    const PER_BATCH = 20;
+    const PER_BATCH_LIMIT = 20;
 
     /**
      * @var PokemonHelper
@@ -49,26 +49,33 @@ class PapiPokemonsCommand extends Command
         // @todo, use offset to be able to import 2nd gen pokemons only.
         $offset = $input->getArgument('offset');
         $limit = $input->getArgument('limit');
-        $batchNumber = floor($limit / self::PER_BATCH);
-        $lastBatchLimit = $limit % self::PER_BATCH;
+        $batchNumber = floor($limit / self::PER_BATCH_LIMIT);
 
         // Use helper method to import pokemons per batches.
         $pokemons = [];
         for ($i=0; $i<$batchNumber; $i++) {
+            $offsetBatch = $offset + ($i*self::PER_BATCH_LIMIT);
             $io->writeln([
-                'Importing ' . self::PER_BATCH . ' pokemons from ' . sprintf("%'.03d\n", ($i*self::PER_BATCH)+1),
+                'Importing ' . self::PER_BATCH_LIMIT . ' pokemons from ' . sprintf("%'.03d\n", $offsetBatch+1),
                 '==============================',
             ]);
-            $pokemons = array_merge($pokemons, $this->pokemonHelper->createPokemonsFromPAPI(self::PER_BATCH, $i*self::PER_BATCH));
+            $pokemons = array_merge($pokemons, $this->pokemonHelper->createPokemonsFromPAPI(self::PER_BATCH_LIMIT, $offsetBatch));
         }
-        $io->writeln([
-            'Importing ' . $lastBatchLimit . ' pokemons from ' . sprintf("%'.03d\n", ($batchNumber*self::PER_BATCH)+1),
-            '==============================',
-        ]);
-        $pokemons = array_merge($pokemons, $this->pokemonHelper->createPokemonsFromPAPI($lastBatchLimit, $batchNumber*self::PER_BATCH));
+
+        // Last batch is off loop to complete import process, if necessary only.
+        if ($lastBatchLimit = $limit % self::PER_BATCH_LIMIT) {
+            $offsetLastBatch = $offset + ($batchNumber*self::PER_BATCH_LIMIT);
+            $io->writeln([
+                'Importing ' . $lastBatchLimit . ' pokemons from ' . sprintf("%'.03d\n", $offsetLastBatch+1),
+                '==============================',
+            ]);
+            $pokemons = array_merge($pokemons, $this->pokemonHelper->createPokemonsFromPAPI($lastBatchLimit, $offsetLastBatch));
+        }
 
         // Confirm message.
-        $io->success(count($pokemons) . ' pokemons successfully imported from PokeAPI V2!');
+        $firstPkmn = $pokemons[0];
+        $lastPkmn = end($pokemons);
+        $io->success(count($pokemons) . ' pokemons successfully imported from PokeAPI V2, from ' . $firstPkmn . ' to ' . $lastPkmn . '!');
         return 0;
     }
 }
