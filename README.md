@@ -72,6 +72,18 @@ Two routes are available to make a call to PokeAPI V2 and import contents:
 * Pokemons: http://symfodex.localhost:8765/papi/create/pokemons
   * For this route, pokemons are imported by batches of 20, but at the end, click the provided link to import next batch
 
+Even better than routes, you can use command lines to fill your database:
+```
+# Connect into PHP docker
+make shell
+cd app/
+# Fill types table
+php bin/console app:papi-types
+# Fill pokemons table (offset and limit are the two required arguments)
+# You will get all 1st gen pokemons with these values
+php bin/console app:papi-pokemon 0 151
+```
+
 ## Symfony command lines
 
 Symfony comes with a lot of useful command lines. You can run these command lines in PHP docker, in the *app/* folder.
