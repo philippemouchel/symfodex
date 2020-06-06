@@ -52,7 +52,7 @@ final class TypeAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('slug')
-            ->add('name')
+            ->addIdentifier('name')
             ->add('color')
             ->add('bootstrapColor');
     }

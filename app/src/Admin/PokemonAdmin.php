@@ -24,6 +24,7 @@ final class PokemonAdmin extends AbstractAdmin
         $formMapper
             ->with('Content', ['class' => 'col-md-9'])
                 ->add('number', IntegerType::class)
+                ->add('slug', TextType::class)
                 ->add('name', TextType::class)
                 ->add('description', TextareaType::class)
                 ->add('height', NumberType::class, [
