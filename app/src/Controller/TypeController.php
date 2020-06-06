@@ -42,11 +42,11 @@ class TypeController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/type/{id}", name="type_show")
-     * @param $id
+     * @Route("/{_locale}/type/{id}", name="type_show", requirements={"id"="\d+"})
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $type = $this->getDoctrine()
             ->getRepository(Type::class)
@@ -54,12 +54,35 @@ class TypeController extends AbstractController
 
         if (!$type) {
             throw $this->createNotFoundException(
-                'No type found for id '.$id
+                'No type found for id ' . $id
             );
         }
 
         return $this->render('type/show.html.twig', [
             'type' => $type,
+        ]);
+    }
+
+    /**
+     * @Route("/{_locale}/type/{slug}", name="type_show_by_slug")
+     * @param string $slug
+     * @return Response
+     */
+    public function showBySlug(string $slug)
+    {
+        $type = $this->getDoctrine()
+            ->getRepository('Gedmo\\Translatable\\Entity\\Translation')
+            ->findObjectByTranslatedField('slug', $slug, 'App\Entity\Type');
+
+        if (!$type) {
+            throw $this->createNotFoundException(
+                'No type found for slug ' . $slug
+            );
+        }
+
+        return $this->render('type/show.html.twig', [
+            'type' => $type,
+            'translations' => $this->typeHelper->getTranslations($type),
         ]);
     }
 

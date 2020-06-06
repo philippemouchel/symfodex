@@ -8,7 +8,7 @@ use Gedmo\Sluggable\Util\Urlizer;
 use PokePHP\PokeApi;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class TypeHelper
+class TypeHelper extends EntityHelper
 {
     /**
      * @var ContainerInterface
@@ -37,10 +37,7 @@ class TypeHelper
      */
     public function __construct(ContainerInterface $container)
     {
-        $this->container = $container;
-        $this->urlizer = new Urlizer();
-        $this->papi = new PokeApi();
-
+        parent::__construct($container);
         $this->data = $this->getDataFromArray();
     }
 
