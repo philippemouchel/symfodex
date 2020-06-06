@@ -18,6 +18,7 @@ final class TypeAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('name', TextType::class)
+            ->add('slug', TextType::class)
             ->add('color', TextType::class, [
                 'help' => 'HTML color (name, HEXA or RGB). See <a href="https://www.w3schools.com/colors/" target="_blank">Colors Tutorial on W3C</a>.
 <br>Gradient 50/50 available, please separate the two colors with <strong>","</strong>.',
@@ -50,7 +51,8 @@ final class TypeAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
+            ->addIdentifier('slug')
+            ->add('name')
             ->add('color')
             ->add('bootstrapColor');
     }
