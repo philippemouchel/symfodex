@@ -27,6 +27,13 @@ class Type implements Translatable
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=128)
+     * @Gedmo\Translatable
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Pokemon", mappedBy="type")
      */
     private $pokemon;
@@ -71,6 +78,18 @@ class Type implements Translatable
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
