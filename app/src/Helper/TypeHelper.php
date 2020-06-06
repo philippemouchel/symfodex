@@ -4,22 +4,10 @@ namespace App\Helper;
 
 
 use App\Entity\Type;
-use PokePHP\PokeApi;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class TypeHelper
+class TypeHelper extends EntityHelper
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
-     * PokeAPI V2 connector.
-     * @var PokeApi
-     */
-    private $papi;
-
     /**
      * @var array
      */
@@ -31,9 +19,7 @@ class TypeHelper
      */
     public function __construct(ContainerInterface $container)
     {
-        $this->container = $container;
-        $this->papi = new PokeApi();
-
+        parent::__construct($container);
         $this->data = $this->getDataFromArray();
     }
 
@@ -233,6 +219,7 @@ class TypeHelper
                 ],
                 'fr' => [
                     'name' => '???',
+                    'slug' => 'inconnu',
                 ],
             ],
             'shadow' => [
@@ -308,23 +295,32 @@ class TypeHelper
                 $tmpType = [];
                 foreach ($papiType->names as $item) {
                     if ($item->language->name == 'en') {
-                        $tmpType['en'] = $item->name;
+                        $tmpType['en'] = [
+                            'name' => $item->name,
+                            'slug' => $papiType->name,
+                        ];
                     }
                     if ($item->language->name == 'fr') {
-                        $tmpType['fr'] = $item->name;
+                        $slugFR = $this->urlizer->urlize($item->name);
+                        $tmpType['fr'] = [
+                            'name' => $item->name,
+                            'slug' => !empty($slugFR) ? $slugFR : $this->data[$papiType->name]['fr']['slug'],
+                        ];
                     }
                 }
 
                 // Instantiate and set properties for english type (assuming it's default locale).
                 $type = new Type();
-                $type->setName($tmpType['en']);
+                $type->setName($tmpType['en']['name']);
+                $type->setSlug($tmpType['en']['slug']);
 
                 // Use hard-coded data to get colors as they are not provided by PokeAPI V2.
                 $type->setColor($this->data[$papiType->name]['en']['color']);
                 $type->setBootstrapColor($this->data[$papiType->name]['en']['bootstrap_color']);
 
                 // Provide french translation.
-                $translationRepository->translate($type, 'name', 'fr', $tmpType['fr']);
+                $translationRepository->translate($type, 'name', 'fr', $tmpType['fr']['name']);
+                $translationRepository->translate($type, 'slug', 'fr', $tmpType['fr']['slug']);
 
                 $entityManager->persist($type);
                 $types[] = $type;

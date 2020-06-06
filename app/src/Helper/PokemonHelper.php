@@ -10,24 +10,8 @@ use PokePHP\PokeApi;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use UnitConverter\UnitConverter;
 
-class PokemonHelper
+class PokemonHelper extends EntityHelper
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
-     * PokeAPI V2 connector.
-     * @var PokeApi
-     */
-    private $papi;
-
-    /**
-     * @var UnitConverter
-     */
-    private $converter;
-
     /**
      * @var array
      */
@@ -39,14 +23,7 @@ class PokemonHelper
      */
     public function __construct(ContainerInterface $container)
     {
-        $this->container = $container;
-        $this->papi = new PokeApi();
-
-        $this->converter = UnitConverter::createBuilder()
-            ->addSimpleCalculator()
-            ->addDefaultRegistry()
-            ->build();
-
+        parent::__construct($container);
         $this->data = $this->getDataFromArray();
     }
 
@@ -279,10 +256,17 @@ class PokemonHelper
                 // translated names array always the same.
                 foreach ($papiPokemonSpec->names as $item) {
                     if ($item->language->name == 'en') {
-                        $tmpPokemon['en']['name'] = $item->name;
+                        $tmpPokemon['en'] = [
+                            'name' => $item->name,
+                            'slug' => $result->name,
+                        ];
                     }
                     if ($item->language->name == 'fr') {
-                        $tmpPokemon['fr']['name'] = $item->name;
+                        $slugFR = $this->urlizer->urlize($item->name);
+                        $tmpPokemon['fr'] = [
+                            'name' => $item->name,
+                            'slug' => !empty($slugFR) ? $slugFR : $result->name,
+                        ];
                     }
                 }
 
@@ -316,6 +300,7 @@ class PokemonHelper
 
                 // Provide french translation.
                 $translationRepository->translate($pokemon, 'name', 'fr', $tmpPokemon['fr']['name']);
+                $translationRepository->translate($pokemon, 'slug', 'fr', $tmpPokemon['fr']['slug']);
                 $translationRepository->translate($pokemon, 'description', 'fr', $tmpPokemon['fr']['description']);
 
                 $entityManager->persist($pokemon);

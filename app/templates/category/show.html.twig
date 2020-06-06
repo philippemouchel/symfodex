@@ -21,10 +21,10 @@
             {% for pokemon in category.pokemon %}
                 <tr>
                     <th scope="row" class="number">{{ pokemon.number }}</a></th>
-                    <td class="name"><a href="{{ path('pokemon_show', {id: pokemon.id}) }}">{{ pokemon.name }}</a></td>
+                    <td class="name"><a href="{{ path('pokemon_show_by_slug', {slug: pokemon.slug}) }}">{{ pokemon.name }}</a></td>
                     <td class="type">
                         {% for type in pokemon.type %}
-                            <a class="badge {% if type.bootstrapColor is not empty %}badge-{{ type.bootstrapColor }}{% endif %}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>
+                            <a class="badge {% if type.bootstrapColor is not empty %}badge-{{ type.bootstrapColor }}{% endif %}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show_by_slug', {slug: type.slug}) }}">{{ type.name }}</a>
                         {% endfor %}
                     </td>
                     <td class="category">{% if pokemon.category is not null %}<a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a>{% endif %}</td>

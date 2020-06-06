@@ -7,7 +7,7 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="localeSwitcherLink">
         {% for locale in locales %}
-        <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: locale })) }}">{{ locale|upper }}</a>
+        <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: locale, slug: translations[locale].slug })) }}">{{ locale|upper }}</a>
         {% endfor %}
     </div>
 </div>
