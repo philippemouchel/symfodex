@@ -57,10 +57,11 @@ class PokemonController extends AbstractController
 
     /**
      * @Route("/{_locale}/pokemon/{slug}", name="pokemon_show_by_slug")
+     * @param Request $request
      * @param string $slug
      * @return Response
      */
-    public function showBySlug(string $slug)
+    public function showBySlug(Request $request, string $slug)
     {
         $pokemon = $this->getDoctrine()
             ->getRepository('Gedmo\\Translatable\\Entity\\Translation')
@@ -74,6 +75,8 @@ class PokemonController extends AbstractController
 
         return $this->render('pokemon/show.html.twig', [
             'pokemon' => $pokemon,
+            'convertHeight' => $this->pokemonHelper->getHeightByLocale($request->getLocale(), $pokemon),
+            'convertWeight' => $this->pokemonHelper->getweightByLocale($request->getLocale(), $pokemon),
             'translations' => $this->pokemonHelper->getTranslations($pokemon),
         ]);
     }
