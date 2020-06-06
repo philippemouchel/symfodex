@@ -5,13 +5,16 @@ namespace App\Helper;
 use App\Entity\Category;
 use App\Entity\Pokemon;
 use App\Entity\Type;
-use Doctrine\Persistence\ManagerRegistry;
-use PokePHP\PokeApi;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use UnitConverter\UnitConverter;
 
 class PokemonHelper extends EntityHelper
 {
+    /**
+     * @var UnitConverter
+     */
+    private $converter;
+
     /**
      * @var array
      */
@@ -24,6 +27,11 @@ class PokemonHelper extends EntityHelper
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
+        $this->converter = UnitConverter::createBuilder()
+            ->addSimpleCalculator()
+            ->addDefaultRegistry()
+            ->build();
+
         $this->data = $this->getDataFromArray();
     }
 
