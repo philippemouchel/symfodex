@@ -41,7 +41,7 @@ class PokemonController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/pokemon/{id}", name="pokemon_show")
+     * @Route("/{_locale}/pokemon/{id}", name="pokemon_show", requirements={"id"="\d+"})
      * @param Request $request
      * @param Pokemon $pokemon
      * @return Response
@@ -52,6 +52,29 @@ class PokemonController extends AbstractController
             'pokemon' => $pokemon,
             'convertHeight' => $this->pokemonHelper->getHeightByLocale($request->getLocale(), $pokemon),
             'convertWeight' => $this->pokemonHelper->getweightByLocale($request->getLocale(), $pokemon),
+        ]);
+    }
+
+    /**
+     * @Route("/{_locale}/pokemon/{slug}", name="pokemon_show_by_slug")
+     * @param string $slug
+     * @return Response
+     */
+    public function showBySlug(string $slug)
+    {
+        $pokemon = $this->getDoctrine()
+            ->getRepository('Gedmo\\Translatable\\Entity\\Translation')
+            ->findObjectByTranslatedField('slug', $slug, 'App\Entity\Pokemon');
+
+        if (!$pokemon) {
+            throw $pokemon->createNotFoundException(
+                'No pokemon found for slug ' . $slug
+            );
+        }
+
+        return $this->render('pokemon/show.html.twig', [
+            'pokemon' => $pokemon,
+            'translations' => $this->pokemonHelper->getTranslations($pokemon),
         ]);
     }
 

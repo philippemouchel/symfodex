@@ -4,28 +4,10 @@ namespace App\Helper;
 
 
 use App\Entity\Type;
-use Gedmo\Sluggable\Util\Urlizer;
-use PokePHP\PokeApi;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class TypeHelper extends EntityHelper
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
-     * @var Urlizer
-     */
-    private $urlizer;
-
-    /**
-     * PokeAPI V2 connector.
-     * @var PokeApi
-     */
-    private $papi;
-
     /**
      * @var array
      */

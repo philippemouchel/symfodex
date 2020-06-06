@@ -32,6 +32,13 @@ class Pokemon implements Translatable
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=128)
+     * @Gedmo\Translatable
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      * @Gedmo\Translatable
      */
@@ -104,6 +111,18 @@ class Pokemon implements Translatable
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
@@ -182,13 +201,15 @@ class Pokemon implements Translatable
         return $this;
     }
 
-    public function getTranslatableLocale()
+    public function getTranslatableLocale(): ?string
     {
         return $this->locale;
     }
 
-    public function setTranslatableLocale($locale)
+    public function setTranslatableLocale($locale): self
     {
         $this->locale = $locale;
+
+        return $this;
     }
 }

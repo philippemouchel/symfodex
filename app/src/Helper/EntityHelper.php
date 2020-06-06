@@ -12,18 +12,18 @@ class EntityHelper
     /**
      * @var ContainerInterface
      */
-    private $container;
+    protected $container;
 
     /**
      * @var Urlizer
      */
-    private $urlizer;
+    protected $urlizer;
 
     /**
      * PokeAPI V2 connector.
      * @var PokeApi
      */
-    private $papi;
+    protected $papi;
 
     /**
      * CategoryHelper constructor.
