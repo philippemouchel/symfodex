@@ -17,7 +17,7 @@
                 </a>
                 <div class="card-body">
                     <p class="card-title"><a href="{{ path('pokemon_show_by_slug', {slug: pokemon.slug}) }}">
-                        {{ pokemon.name }} <span class="text-secondary">#{{ "%03d"|format(pokemon.number) }}</span></a></p>
+                        {{ pokemon.name }} <strong class="text-secondary">#{{ "%03d"|format(pokemon.number) }}</strong></a></p>
                     <p class="card-text">{% for type in pokemon.type %}
                         <a class="badge {% if type.bootstrapColor is not empty %}badge-{{ type.bootstrapColor }}{% endif %}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>
                     {% endfor %}</p>

@@ -8,21 +8,19 @@
     <h1>{% trans %}label.types{% endtrans %}</h1>
 
     {% if types is not empty %}
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col" class="name">{% trans %}label.name{% endtrans %}</th>
-            </tr>
-        </thead>
-        <tbody>
+        <div class="row row-cols-2 row-cols-lg-4 row-cols-xl-6">
         {% for type in types %}
-            <tr>
-                <th scope="row" class="name">
-                    <h3><a class="badge {% if type.bootstrapColor is not empty %}badge-{{ type.bootstrapColor }}{% endif %}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show_by_slug', {slug: type.slug}) }}">{{ type.name }}</a></h3>
-                </th>
-            </tr>
+            <div class="col mb-4">
+                <a class="card" href="{{ path('type_show_by_slug', {slug: type.slug}) }}">
+                    <h2 class="card-header">
+                        <span class="badge {% if type.bootstrapColor is not empty %}badge-{{ type.bootstrapColor }}{% endif %}" style="{{ type.getBackgroundProperty }}">{{ type.name }}</span>
+                    </h2>
+                    <div class="card-body">
+                        <img src="/assets/types/{{ type.slug }}.png" class="card-img-top" alt="{{ type.name }}">
+                    </div>
+                </a>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+        </div>
     {% endif %}
 {% endblock %}
