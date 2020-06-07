@@ -73,15 +73,36 @@ Two routes are available to make a call to PokeAPI V2 and import contents:
   * For this route, pokemons are imported by batches of 20, but at the end, click the provided link to import next batch
 
 Even better than routes, you can use command lines to fill your database:
-```
+```bash
 # Connect into PHP docker
 make shell
 cd app/
 # Fill types table
 php bin/console app:papi-types
 # Fill pokemons table (offset and limit are the two required arguments)
-# You will get all 1st gen pokemons with these values
-php bin/console app:papi-pokemon 0 151
+php bin/console app:papi-pokemon 0 151   # 1st gen.
+php bin/console app:papi-pokemon 151 100 # 2nd gen.
+```
+### 3rd. generation
+* [\#386 Deoxys](https://www.pokemon.com/us/pokedex/deoxys "Deoxys on pokemon.com") import will not work, because of its 4 forms.
+```bash
+php bin/console app:papi-pokemon 251 134 # 3rd gen. # some issues with 386 Deoxys (different forms)
+```
+### 4th. generation
+* [\#413 Wormadam](https://www.pokemon.com/us/pokedex/wormadam "Wormadam on pokemon.com") import will not work, because of its 3 forms.
+* [\#492 Shaymin](https://www.pokemon.com/us/pokedex/shaymin "Shaymin on pokemon.com") import will not work, because of its 2 forms.
+```bash
+php bin/console app:papi-pokemon 386 107 # 4th gen. # some issues with 413 Wormadam & 492 Shaymin (different forms)
+```
+### 5th. generation
+* [\#386 Deoxys](https://www.pokemon.com/us/pokedex/deoxys "Deoxys on pokemon.com") import will not work, because of its 4 forms.
+* [\#550 Basculin](https://www.pokemon.com/us/pokedex/basculin "Basculin on pokemon.com") import will not work, because of its 2 colors.
+* [\#555 Darmanitan](https://www.pokemon.com/us/pokedex/darmanitan "Darmanitan on pokemon.com") import will not work, because of its 2 modes.
+* [\#641 Tornadus](https://www.pokemon.com/us/pokedex/tornadus "Tornadus on pokemon.com") & [\#642 Thundurus](https://www.pokemon.com/us/pokedex/thundurus "Thundurus on pokemon.com") imports will not work, because of theirs 2 forms.
+* [\#647 Keldeo](https://www.pokemon.com/us/pokedex/keldeo "Keldeo on pokemon.com") import will not work, not sure why though.
+* [\#648 Meloetta](https://www.pokemon.com/us/pokedex/meloetta "Meloetta on pokemon.com") import will not work, because of its 2 forms.
+```bash
+php bin/console app:papi-pokemon 493 156
 ```
 
 ## Symfony command lines
