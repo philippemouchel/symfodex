@@ -15,13 +15,13 @@ These package are in active development, so I hope I'll be able to upgrade back 
 To run locally, you have to start a **Wodby4PHP** stack, here are the requirements: https://wodby.com/docs/stacks/php/local/
 
 Local environment is all set, and you should only have to run one command to run the entire stack:
-```
+```bash
 # from project root
 make up
 ```
 
 Once it's running, you may want to connect in the main docker, and install vendors using **composer**:
-```
+```bash
 # from project root, with project running
 make shell
 # once in PHP docker
@@ -30,13 +30,13 @@ composer install
 ```
 
 Of course, database is empty, you'll have to run migrations to get data structure, and then fill database using Admin UI.
-```
+```bash
 # run all migrations to create SQL tables
 php bin/console doctrine:migrations:migrate --no-interaction
 ```
 
 Or, you can find databases dump in build/local/ folder. Feel free to import one, using a command like:
-```
+```bash
 # import a database (deprecated, as you can now import contents from PokeAPI V2
 php bin/console doctrine:database:import ../build/local/40-pokemon.sql
 # run all migrations to create SQL tables (just in case imported DB is too old)
@@ -55,7 +55,7 @@ Also, Elastic Search indexes are on READONLY mode, even if populate command line
 This is why an error such as `blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];` is triggered.
 
 Here are the two commands to fix that:
-```
+```bash
 # from project root, with project running
 make shell
 # once in PHP docker
@@ -86,13 +86,13 @@ php bin/console app:papi-pokemon 151 100 # 2nd gen.
 ### 3rd. generation
 * [\#386 Deoxys](https://www.pokemon.com/us/pokedex/deoxys "Deoxys on pokemon.com") import will not work, because of its 4 forms.
 ```bash
-php bin/console app:papi-pokemon 251 134 # 3rd gen. # some issues with 386 Deoxys (different forms)
+php bin/console app:papi-pokemon 251 134
 ```
 ### 4th. generation
 * [\#413 Wormadam](https://www.pokemon.com/us/pokedex/wormadam "Wormadam on pokemon.com") import will not work, because of its 3 forms.
 * [\#492 Shaymin](https://www.pokemon.com/us/pokedex/shaymin "Shaymin on pokemon.com") import will not work, because of its 2 forms.
 ```bash
-php bin/console app:papi-pokemon 386 107 # 4th gen. # some issues with 413 Wormadam & 492 Shaymin (different forms)
+php bin/console app:papi-pokemon 386 107
 ```
 ### 5th. generation
 * [\#386 Deoxys](https://www.pokemon.com/us/pokedex/deoxys "Deoxys on pokemon.com") import will not work, because of its 4 forms.
@@ -108,7 +108,7 @@ php bin/console app:papi-pokemon 493 156
 ## Symfony command lines
 
 Symfony comes with a lot of useful command lines. You can run these command lines in PHP docker, in the *app/* folder.
-```
+```bash
 # from project root, with project running
 make shell
 # once in PHP docker
