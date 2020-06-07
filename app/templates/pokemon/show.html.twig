@@ -6,21 +6,28 @@
     {% include 'navigation/main-menu.html.twig' with {'active_route': 'pokemon'} %}
 
     <div class="card">
-        <h1 class="card-header">{{ pokemon.name }} <span class="text-secondary">#{{ "%03d"|format(pokemon.number) }}</span></h1>
-        <div class="card-body">
-            <p class="card-text">{{ pokemon.description }}</p>
+        <div class="row no-gutters">
+            <div class="col-md-8">
+                <h1 class="card-header">{{ pokemon.name }} <span class="text-secondary">#{{ "%03d"|format(pokemon.number) }}</span></h1>
+                <div class="card-body">
+                    <p class="card-text">{{ pokemon.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% if pokemon.category is not null %}
+                        <li class="list-group-item"><span class="text-secondary">{% trans %}label.category-sc{% endtrans %}</span> <a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a></li>
+                    {% endif %}
+                    <li class="list-group-item"><span class="text-secondary">{% trans %}label.height-sc{% endtrans %}</span> {{ convertHeight }}</li>
+                    <li class="list-group-item"><span class="text-secondary">{% trans %}label.weight-sc{% endtrans %}</span> {{ convertWeight }}</li>
+                    <li class="list-group-item">
+                        <h4>{% for type in pokemon.type %}
+                                <a class="badge {% if type.bootstrapColor is not empty %}badge-{{ type.bootstrapColor }}{% endif %}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show_by_slug', {slug: type.slug}) }}">{{ type.name }}</a>
+                            {% endfor %}</h4>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4 border-left" style="background-color: lightgray">
+                <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{ pokemon.getFormattedNumber }}.png" class="card-img" alt="{{ pokemon.name }}">
+            </div>
         </div>
-        <ul class="list-group list-group-flush">
-            {% if pokemon.category is not null %}
-            <li class="list-group-item"><span class="text-secondary">{% trans %}label.category-sc{% endtrans %}</span> <a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a></li>
-            {% endif %}
-            <li class="list-group-item"><span class="text-secondary">{% trans %}label.height-sc{% endtrans %}</span> {{ convertHeight }}</li>
-            <li class="list-group-item"><span class="text-secondary">{% trans %}label.weight-sc{% endtrans %}</span> {{ convertWeight }}</li>
-            <li class="list-group-item">
-                <h4>{% for type in pokemon.type %}
-                        <a class="badge {% if type.bootstrapColor is not empty %}badge-{{ type.bootstrapColor }}{% endif %}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show_by_slug', {slug: type.slug}) }}">{{ type.name }}</a>
-                    {% endfor %}</h4>
-            </li>
-        </ul>
     </div>
 {% endblock %}

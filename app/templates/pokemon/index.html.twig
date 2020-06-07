@@ -8,29 +8,23 @@
     <h1>{% trans %}label.pokemon{% endtrans %}</h1>
 
     {% if pokemons is not empty %}
-    <table class="table table-striped">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col" class="number">#</th>
-                <th scope="col" class="name">{% trans %}label.name{% endtrans %}</th>
-                <th scope="col" class="type">{% trans %}label.type{% endtrans %}</th>
-                <th scope="col" class="category">{% trans %}label.category{% endtrans %}</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4">
         {% for pokemon in pokemons %}
-            <tr>
-                <th scope="row" class="number">{{ pokemon.number }}</th>
-                <td class="name"><a href="{{ path('pokemon_show_by_slug', {slug: pokemon.slug}) }}">{{ pokemon.name }}</a></td>
-                <td class="type">
-                    {% for type in pokemon.type %}
+        <div class="col mb-4">
+            <div class="card">
+                <a href="{{ path('pokemon_show_by_slug', {slug: pokemon.slug}) }}">
+                    <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{ pokemon.getFormattedNumber }}.png" class="card-img-top" style="background-color: lightgray" alt="{{ pokemon.name }}">
+                </a>
+                <div class="card-body">
+                    <p class="card-title"><a href="{{ path('pokemon_show_by_slug', {slug: pokemon.slug}) }}">
+                        {{ pokemon.name }} <span class="text-secondary">#{{ "%03d"|format(pokemon.number) }}</span></a></p>
+                    <p class="card-text">{% for type in pokemon.type %}
                         <a class="badge {% if type.bootstrapColor is not empty %}badge-{{ type.bootstrapColor }}{% endif %}" style="{{ type.getBackgroundProperty }}" href="{{ path('type_show', {id: type.id}) }}">{{ type.name }}</a>
-                    {% endfor %}
-                </td>
-                <td class="category">{% if pokemon.category is not null %}<a href="{{ path('category_show', {id: pokemon.category.id}) }}">{{ pokemon.category.name }}</a>{% endif %}</td>
-            </tr>
+                    {% endfor %}</p>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
     {% endif %}
 {% endblock %}
