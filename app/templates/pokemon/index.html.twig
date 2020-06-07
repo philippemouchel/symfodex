@@ -13,7 +13,7 @@
         <div class="col mb-4">
             <div class="card">
                 <a href="{{ path('pokemon_show_by_slug', {slug: pokemon.slug}) }}">
-                    <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{ pokemon.getFormattedNumber }}.png" class="card-img-top" style="background-color: lightgray" alt="{{ pokemon.name }}">
+                    <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{ pokemon.getFormattedNumber }}.png" class="card-img-top" style="background-color: #f2f2f2" alt="{{ pokemon.name }}">
                 </a>
                 <div class="card-body">
                     <p class="card-title"><a href="{{ path('pokemon_show_by_slug', {slug: pokemon.slug}) }}">
