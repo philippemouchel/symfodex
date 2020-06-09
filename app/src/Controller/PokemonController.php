@@ -6,15 +6,17 @@ use App\Entity\Pokemon;
 use App\Entity\Category;
 use App\Entity\Type;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
 use App\Helper\PokemonHelper;
 use UnitConverter\UnitConverter;
+use Knp\Component\Pager\PaginatorInterface;
 
 class PokemonController extends AbstractController
 {
+
     /**
      * @var PokemonHelper
      */
@@ -28,11 +30,19 @@ class PokemonController extends AbstractController
     /**
      * @Route("/{_locale}/pokemon", name="pokemon")
      */
-    public function index()
+    public function index(Request $request, PaginatorInterface $paginator)
     {
         // Instantiate entity repository to load all pokemons.
         $pokemonRepository = $this->getDoctrine()->getRepository(Pokemon::class);
-        $pokemons = $pokemonRepository->findAll();
+        $entities = $pokemonRepository->findAll();
+
+        // Add KNP pagination.
+        $pokemons = $paginator->paginate(
+            $entities, // Entities list to paginate.
+            $request->query->getInt('page', 1), // Page to display.
+            24 // Number of entities per page.
+        );
+        $pokemons->setCustomParameters(['align' => 'center']);
 
         return $this->render('pokemon/index.html.twig', [
             'controller_name' => 'PokemonController',
