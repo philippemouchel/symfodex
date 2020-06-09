@@ -72,6 +72,21 @@ class Pokemon implements Translatable
      */
     private $locale;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=EvolutionChain::class, inversedBy="pokemon")
+     */
+    private $evolutionChain;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Evolution::class, inversedBy="pokemon")
+     */
+    private $evolution;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Evolution::class, inversedBy="evolvesTo")
+     */
+    private $evolvesFrom;
+
     public function __construct()
     {
         $this->type = new ArrayCollection();
@@ -209,6 +224,42 @@ class Pokemon implements Translatable
     public function setTranslatableLocale($locale): self
     {
         $this->locale = $locale;
+
+        return $this;
+    }
+
+    public function getEvolutionChain(): ?EvolutionChain
+    {
+        return $this->evolutionChain;
+    }
+
+    public function setEvolutionChain(?EvolutionChain $evolutionChain): self
+    {
+        $this->evolutionChain = $evolutionChain;
+
+        return $this;
+    }
+
+    public function getEvolution(): ?Evolution
+    {
+        return $this->evolution;
+    }
+
+    public function setEvolution(?Evolution $evolution): self
+    {
+        $this->evolution = $evolution;
+
+        return $this;
+    }
+
+    public function getEvolvesFrom(): ?Evolution
+    {
+        return $this->evolvesFrom;
+    }
+
+    public function setEvolvesFrom(?Evolution $evolvesFrom): self
+    {
+        $this->evolvesFrom = $evolvesFrom;
 
         return $this;
     }
