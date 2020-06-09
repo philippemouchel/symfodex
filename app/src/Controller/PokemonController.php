@@ -42,6 +42,7 @@ class PokemonController extends AbstractController
             $request->query->getInt('page', 1), // Page to display.
             24 // Number of entities per page.
         );
+        $pokemons->setCustomParameters(['align' => 'center']);
 
         return $this->render('pokemon/index.html.twig', [
             'controller_name' => 'PokemonController',
